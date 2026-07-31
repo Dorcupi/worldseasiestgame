@@ -1,19 +1,22 @@
 extends Node2D
 
-var main_menu: int = 1
-var tween: Tween
+@onready var main_game: PackedScene = preload("res://scenes/main.tscn")
+@export var trans_animation_player: AnimationPlayer
 
-@export var label: Label
+func _ready() -> void:
+	trans_animation_player.play_backwards("fade_out")
+	if GlobalResources.music_level != GlobalResources.MUSIC_LEVEL.LEVEL_6:
+		GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.LEVEL_6
 
-func _process(delta: float) -> void:
-	if main_menu == 1:
-		if Input.is_anything_pressed():
-			main_menu == 0
-			tween = create_tween()
-			tween.tween_property(label, "modulate", Color("ffffff00"), 0.5).from(Color("ffffff"))
-			tween.tween_interval(0.2)
-			tween.tween_callback(switch)
+func _on_play_button_pressed() -> void:
+	trans_animation_player.play("fade_out")
+	await trans_animation_player.animation_finished
+	get_tree().change_scene_to_packed(main_game)
 
-func switch() -> void:
-	tween.kill()
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+
+func _on_quit_button_pressed() -> void:
+	if GlobalResources.music_level != GlobalResources.MUSIC_LEVEL.OFF:
+		GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.OFF 
+	trans_animation_player.play("fade_out")
+	await trans_animation_player.animation_finished
+	get_tree().quit()

@@ -2,40 +2,243 @@
 
 [ext_resource type="Script" uid="uid://bxl7tiqrx0pas" path="res://scripts/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="FontFile" uid="uid://bf3vll2nksry7" path="res://assets/fonts/Gorditas-Bold.ttf" id="1_l6cm7"]
+[ext_resource type="Shader" uid="uid://bs8efxd4ky7hr" path="res://shaders/stripes.gdshader" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://do3gmtvfrhikh" path="res://assets/ui/Yellow/Default/button_square_depth_border.png" id="3_8ln24"]
+[ext_resource type="Shader" uid="uid://b72u0bllgx3x2" path="res://shaders/transition.gdshader" id="3_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://c8dhur41cbb8s" path="res://assets/ui/Yellow/Double/button_rectangle_depth_gradient.png" id="5_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://drlop0hbsreos" path="res://assets/ui/Yellow/Double/button_rectangle_gradient.png" id="6_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://dxufg508yo6xm" path="res://assets/ui/Yellow/Double/button_rectangle_flat.png" id="7_5dd4i"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqqt6"]
+shader = ExtResource("2_ekxnf")
+shader_parameter/color_gap = Color(0.9764706, 0.9098039, 0.63529414, 1)
+shader_parameter/color_stripe = Color(0.96371835, 0.87453634, 0.5058518, 1)
+shader_parameter/divisions = 12.0
+shader_parameter/stripe_bias = 2.0
+shader_parameter/speed = 0.1
+shader_parameter/angle = 0.58
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rtw2f"]
+texture = ExtResource("3_8ln24")
+texture_margin_left = 13.0
+texture_margin_top = 13.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_oa1go"]
 font = ExtResource("1_l6cm7")
-font_size = 30
-font_color = Color(0, 0, 0, 1)
+font_size = 55
+outline_color = Color(0.9764706, 0.9098039, 0.63529414, 1)
+shadow_color = Color(0, 0, 0, 0.14509805)
+shadow_offset = Vector2(0, 6)
 
-[node name="Node2D" type="Node2D" unique_id=168202991 node_paths=PackedStringArray("label")]
+[sub_resource type="LabelSettings" id="LabelSettings_jkv2x"]
+font = ExtResource("1_l6cm7")
+font_size = 40
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wu84c"]
+shader = ExtResource("3_bqqt6")
+shader_parameter/AspectRatio = 1.5
+shader_parameter/Diamonds = 10.0
+shader_parameter/pixel_size = 0.08
+shader_parameter/height = 1.0
+shader_parameter/disable_pixel = false
+
+[sub_resource type="Animation" id="Animation_jkv2x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_jbj1t"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ln24"]
+_data = {
+&"RESET": SubResource("Animation_jkv2x"),
+&"fade_out": SubResource("Animation_jbj1t")
+}
+
+[node name="Node2D" type="Node2D" unique_id=168202991 node_paths=PackedStringArray("trans_animation_player")]
 script = ExtResource("1_ekxnf")
-label = NodePath("CanvasLayer/MarginContainer/Label")
+trans_animation_player = NodePath("CanvasLayer2/AnimationPlayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1146844043]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=909131808]
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=666156376]
+material = SubResource("ShaderMaterial_bqqt6")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
+mouse_filter = 2
+color = Color(0.9764706, 0.9098039, 0.63529414, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=872768681]
+[node name="Control2" type="Control" parent="CanvasLayer" unique_id=58204728]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_right = 30
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/MarginContainer" unique_id=1812537490]
-layout_mode = 2
-text = "to anyone playing this game,
-this game was supposed to be about a narrator convincing you to beat the game by waiting thirty seconds, but you disobey his orders and play WarioWare-style microgames to prolong the countdown (get it) until you win-lose or whatever you like to call it. however, I had no time and I also didn't want to scrap what I did do. so please enjoy this very small demo. press any button to start.
-ps: still rate this as you normally would."
-label_settings = SubResource("LabelSettings_g4v7s")
+[node name="Panel" type="Panel" parent="CanvasLayer/Control2" unique_id=1587650280]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -139.5
+offset_top = 92.0
+offset_right = 139.5
+offset_bottom = 155.0
+grow_horizontal = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(3, 3)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_rtw2f")
+
+[node name="Title" type="Label" parent="CanvasLayer/Control2" unique_id=400128549]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -383.5
+offset_top = 42.0
+offset_right = 384.5
+offset_bottom = 193.0
+grow_horizontal = 2
+text = "The World's Easiest Game"
+label_settings = SubResource("LabelSettings_oa1go")
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=834702628]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 225
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=1609234509]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="PlayButton" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=3636505]
+custom_minimum_size = Vector2(307.2, 102.4)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_tbmy8")
+texture_pressed = ExtResource("6_jk1qb")
+texture_disabled = ExtResource("7_5dd4i")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/PlayButton" unique_id=1272839710]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+label_settings = SubResource("LabelSettings_jkv2x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsButton" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1197450601]
+custom_minimum_size = Vector2(307.2, 102.4)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_tbmy8")
+texture_pressed = ExtResource("6_jk1qb")
+texture_disabled = ExtResource("7_5dd4i")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/SettingsButton" unique_id=2049558665]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_jkv2x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1896651275]
+custom_minimum_size = Vector2(307.2, 102.4)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_tbmy8")
+texture_pressed = ExtResource("6_jk1qb")
+texture_disabled = ExtResource("7_5dd4i")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/QuitButton" unique_id=1528534228]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+label_settings = SubResource("LabelSettings_jkv2x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1438618671]
+layer = 1000
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=36045374]
+material = SubResource("ShaderMaterial_wu84c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2" unique_id=1241941467]
+libraries/ = SubResource("AnimationLibrary_8ln24")
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

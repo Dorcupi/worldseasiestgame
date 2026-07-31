@@ -13,13 +13,19 @@ config_version=5
 config/name="The World's Easiest Game"
 config/description="Just wait 30 seconds to win the game. Don't do anything else."
 config/version="0.1.0"
-run/main_scene="uid://cqj0o676jvibd"
+run/main_scene="uid://dampei1nmuyjy"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="uid://cglb1yrg1i7yv"
+
+[audio]
+
+buses/default_bus_layout="uid://dvkc5thm1bwc5"
 
 [autoload]
 
 Screenshots="*uid://bljdk7ctqona7"
+GlobalResources="*uid://by1hfnayr4eyw"
 
 [display]
 

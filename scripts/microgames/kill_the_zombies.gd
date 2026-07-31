@@ -18,7 +18,8 @@ func _process(delta: float) -> void:
 		player.can_move = true
 		for i in get_tree().get_nodes_in_group("enemies"):
 			i.can_move = true
-			i.connect("attacked", hurt_player)
+			if not i.attacked.is_connected(hurt_player):
+				i.attacked.connect(hurt_player)
 	if game_playing:
 		if get_tree().get_node_count_in_group("enemies") <= 0:
 			player.can_move = false

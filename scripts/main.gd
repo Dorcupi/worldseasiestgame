@@ -23,12 +23,21 @@ enum GAME_STATE {
 @export var level_up_popup: Label
 @onready var trans_animation_player: AnimationPlayer = $CanvasLayer2/AnimationPlayer
 
+## Audio Nodes
+@export var button_alarm_player: AudioStreamPlayer
+@export var door_open_player: AudioStreamPlayer
+@export var door_close_player: AudioStreamPlayer
+@export var win_piano_player: AudioStreamPlayer
+@export var lose_piano_player: AudioStreamPlayer
+
+
 ## Variables
 @export var microgames: Array[PackedScene]
 @onready var unplayed_microgames: Array[PackedScene] = microgames.duplicate()
 @export var starting_time: float = 60.0
 @export var start_add_amount: Array[float] = [3, 5]
 @onready var time_left: float = starting_time
+var time_spent: float = 0
 var current_state: GAME_STATE = GAME_STATE.MAIN_SCENE
 var current_microgame: Microgame
 var add_amount: Array[float] = start_add_amount
@@ -36,6 +45,7 @@ var level: int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GlobalResources.music_transition_time = 1
 	microgame_button.button.pressed.connect(start_microgame)
 	trans_animation_player.play_backwards("fade_out")
 
@@ -44,10 +54,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if current_state != GAME_STATE.GAME_OVER:
 		time_left -= delta
+		time_spent += delta
 	time_left_label.text = "%.0f" % time_left
 	if current_state == GAME_STATE.MAIN_SCENE:
+		if GlobalResources.music_level != GlobalResources.MUSIC_LEVEL.LEVEL_4:
+			GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.LEVEL_4
 		if time_left <= 0.0:
 			current_state = GAME_STATE.GAME_OVER
+			GlobalResources.update_time(time_spent)
+			GlobalResources.music_transition_time = 2
 			trans_animation_player.play("fade_out")
 			await trans_animation_player.animation_finished
 			get_tree().change_scene_to_file("res://scenes/you_win.tscn")
@@ -78,6 +93,7 @@ func level_up() -> void:
 		if not i <= 0.5:
 			add_amount[add_amount.find(i)] = (i - 0.5)
 	unplayed_microgames = microgames.duplicate()
+	button_alarm_player.play()
 	level_up_popup.get_node("AnimationPlayer").play("popup")
 	await level_up_popup.get_node("AnimationPlayer").animation_finished
 
@@ -89,8 +105,11 @@ func start_microgame() -> void:
 	if current_state == GAME_STATE.MAIN_SCENE:
 		current_state = GAME_STATE.MINIGAME
 		await spawn_microgame()
+		if GlobalResources.music_level != GlobalResources.MUSIC_LEVEL.LEVEL_2:
+			GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.LEVEL_2
 		game_name_popup.text = current_microgame.game_name
 		game_name_popup.get_node("AnimationPlayer").play("appear")
+		door_open_player.play()
 		main_animation_player.play("break_apart")
 		await main_animation_player.animation_finished
 		current_microgame.game_playing = true
@@ -100,6 +119,8 @@ func win_microgame() -> void:
 		print("WIN GAME")
 		time_left += snapped(randf_range(add_amount[0], add_amount[1]), 0.5)
 		current_state = GAME_STATE.MOVING_BACK
+		door_close_player.play()
+		win_piano_player.play()
 		main_animation_player.play_backwards("break_apart")
 		await main_animation_player.animation_finished
 		despawn_microgame()
@@ -109,6 +130,8 @@ func lose_microgame() -> void:
 	if current_state == GAME_STATE.MINIGAME:
 		print("LOSE GAME")
 		current_state = GAME_STATE.MOVING_BACK
+		door_close_player.play()
+		lose_piano_player.play()
 		main_animation_player.play_backwards("break_apart")
 		await main_animation_player.animation_finished
 		despawn_microgame()

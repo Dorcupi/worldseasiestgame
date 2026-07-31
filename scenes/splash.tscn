@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://dampei1nmuyjy"]
+
+[ext_resource type="Script" uid="uid://cjrc16tqi4h0x" path="res://scripts/splash.gd" id="1_6ot2y"]
+[ext_resource type="PackedScene" uid="uid://cqj0o676jvibd" path="res://scenes/main_menu.tscn" id="2_31efs"]
+[ext_resource type="Texture2D" uid="uid://bu1346gk20li8" path="res://assets/splash/logo/dorcdevlogo.png" id="3_31efs"]
+[ext_resource type="Texture2D" uid="uid://ddkrc0iyw1n45" path="res://assets/splash/dorcdevgradienthorizontal.png" id="3_c8158"]
+[ext_resource type="Texture2D" uid="uid://e4e07d3xcwjw" path="res://assets/splash/logo/dorcdevtext.png" id="4_c8158"]
+
+[sub_resource type="Animation" id="Animation_47b56"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/CenterContainer/Control/Logo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/CenterContainer/Control/Logo/RestOfText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(576, 324)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e4bpr"]
+resource_name = "splash"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/CenterContainer/Control/Logo:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -500), Vector2(0, -500), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/CenterContainer/Control/Logo/RestOfText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(576, 324), Vector2(814, 324)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mmpmm"]
+_data = {
+&"RESET": SubResource("Animation_47b56"),
+&"splash": SubResource("Animation_e4bpr")
+}
+
+[node name="Node2D" type="Node2D" unique_id=1274083135]
+script = ExtResource("1_6ot2y")
+scene_to_switch = ExtResource("2_31efs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1523439579]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=312014061]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="." unique_id=1356570720]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1153.0
+offset_bottom = 650.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Control" unique_id=77111616]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Control/CenterContainer" unique_id=204949290]
+layout_mode = 2
+
+[node name="Background" type="Sprite2D" parent="Control/CenterContainer/Control" unique_id=35167377]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_c8158")
+
+[node name="Logo" type="Sprite2D" parent="Control/CenterContainer/Control" unique_id=657417087]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_31efs")
+
+[node name="RestOfText" type="Sprite2D" parent="Control/CenterContainer/Control/Logo" unique_id=1046645189]
+position = Vector2(596.877, 0)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("4_c8158")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=98229399]
+libraries/ = SubResource("AnimationLibrary_mmpmm")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=96343799]
+position = Vector2(576, 324)
+position_smoothing_enabled = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

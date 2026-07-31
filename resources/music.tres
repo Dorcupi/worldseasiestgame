@@ -1,0 +1,23 @@
+[gd_resource type="AudioStreamSynchronized" format=3 uid="uid://qu7tllnd8m33"]
+
+[ext_resource type="AudioStream" uid="uid://3nt10vjrdq07" path="res://assets/music/drums.wav" id="1_huwt4"]
+[ext_resource type="AudioStream" uid="uid://msnytvnwgqv8" path="res://assets/music/bass.wav" id="2_evs14"]
+[ext_resource type="AudioStream" uid="uid://cwc6v1doaqtjn" path="res://assets/music/guitar.wav" id="3_eqylk"]
+[ext_resource type="AudioStream" uid="uid://bcu68kclg4v3u" path="res://assets/music/rhodes.wav" id="4_mmsdj"]
+[ext_resource type="AudioStream" uid="uid://b3d3t1bkxlubo" path="res://assets/music/pianobacking.wav" id="5_gjpa0"]
+[ext_resource type="AudioStream" uid="uid://vda55u3f6kgg" path="res://assets/music/melody.wav" id="6_ays7m"]
+
+[resource]
+stream_count = 6
+stream_0/stream = ExtResource("1_huwt4")
+stream_0/volume = -60.0
+stream_1/stream = ExtResource("2_evs14")
+stream_1/volume = -60.0
+stream_2/stream = ExtResource("3_eqylk")
+stream_2/volume = -60.0
+stream_3/stream = ExtResource("4_mmsdj")
+stream_3/volume = -60.0
+stream_4/stream = ExtResource("5_gjpa0")
+stream_4/volume = -60.0
+stream_5/stream = ExtResource("6_ays7m")
+stream_5/volume = -60.0
