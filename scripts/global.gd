@@ -45,6 +45,7 @@ func _ready() -> void:
 	music_player.stream = music_resource
 	music_player.bus = "Music"
 	music_player.volume_db = -20
+	music_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(music_player)
 	# music_player.play()
 

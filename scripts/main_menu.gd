@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var main_game: PackedScene = preload("res://scenes/main.tscn")
+@onready var main_game: PackedScene = load("res://scenes/main.tscn")
 @export var trans_animation_player: AnimationPlayer
 
 func _ready() -> void:

@@ -22,6 +22,7 @@ enum GAME_STATE {
 @export var game_name_popup: Label
 @export var level_up_popup: Label
 @onready var trans_animation_player: AnimationPlayer = $CanvasLayer2/AnimationPlayer
+@export var pause_menu: CanvasLayer
 
 ## Audio Nodes
 @export var button_alarm_player: AudioStreamPlayer
@@ -29,7 +30,8 @@ enum GAME_STATE {
 @export var door_close_player: AudioStreamPlayer
 @export var win_piano_player: AudioStreamPlayer
 @export var lose_piano_player: AudioStreamPlayer
-
+@export var clock_tick_player: AudioStreamPlayer
+@export var heart_beat_player: AudioStreamPlayer
 
 ## Variables
 @export var microgames: Array[PackedScene]
@@ -37,6 +39,7 @@ enum GAME_STATE {
 @export var starting_time: float = 60.0
 @export var start_add_amount: Array[float] = [3, 5]
 @onready var time_left: float = starting_time
+@onready var once_second_time: int = int(time_left)
 var time_spent: float = 0
 var current_state: GAME_STATE = GAME_STATE.MAIN_SCENE
 var current_microgame: Microgame
@@ -55,7 +58,11 @@ func _process(delta: float) -> void:
 	if current_state != GAME_STATE.GAME_OVER:
 		time_left -= delta
 		time_spent += delta
-	time_left_label.text = "%.0f" % time_left
+		if time_left > 0.0:
+			if float(once_second_time) - time_left >= 1.00:
+				once_second_time -= 1
+				once_per_second()
+	time_left_label.text = "%.0f" % ceil(time_left)
 	if current_state == GAME_STATE.MAIN_SCENE:
 		if GlobalResources.music_level != GlobalResources.MUSIC_LEVEL.LEVEL_4:
 			GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.LEVEL_4
@@ -69,6 +76,16 @@ func _process(delta: float) -> void:
 	elif current_state == GAME_STATE.MINIGAME:
 		if time_left <= 0.0:
 			current_microgame.emit_signal("lose_game")
+
+func once_per_second() -> void:
+	print("TICK")
+	clock_tick_player.play()
+	if current_state == GAME_STATE.MINIGAME:
+		heart_beat_player.play()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		pause_menu.trigger_pause()
 
 func spawn_microgame() -> void:
 	var microgame: Node
@@ -117,7 +134,9 @@ func start_microgame() -> void:
 func win_microgame() -> void:
 	if current_state == GAME_STATE.MINIGAME:
 		print("WIN GAME")
-		time_left += snapped(randf_range(add_amount[0], add_amount[1]), 0.5)
+		var added_time: float = snapped(randf_range(add_amount[0], add_amount[1]), 0.5)
+		time_left += added_time
+		once_second_time += ceil(added_time)
 		current_state = GAME_STATE.MOVING_BACK
 		door_close_player.play()
 		win_piano_player.play()
