@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var main_game: PackedScene = load("res://scenes/main.tscn")
+@onready var settings: PackedScene = load("res://scenes/settings.tscn")
 @export var trans_animation_player: AnimationPlayer
 
 func _ready() -> void:
@@ -19,4 +20,10 @@ func _on_quit_button_pressed() -> void:
 		GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.OFF 
 	trans_animation_player.play("fade_out")
 	await trans_animation_player.animation_finished
-	get_tree().quit()
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+
+
+func _on_settings_button_pressed() -> void:
+	trans_animation_player.play("fade_out")
+	await trans_animation_player.animation_finished
+	get_tree().change_scene_to_packed(settings)

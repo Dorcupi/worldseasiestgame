@@ -35,12 +35,20 @@ var tween: Tween
 
 var music_transition_time: float = 2
 
+var default_volume_levels: Dictionary = {
+	"Master": linear_to_db(1.0),
+	"Music": linear_to_db(1.0),
+	"Sound Effects": linear_to_db(1.0),
+	"Microgame Sound Effects": linear_to_db(1.0),
+}
+
 var music_level: MUSIC_LEVEL = MUSIC_LEVEL.OFF:
 	set(value):
 		music_level = value
 		update_level(value)
 
 func _ready() -> void:
+	load_settings()
 	music_player = AudioStreamPlayer.new()
 	music_player.stream = music_resource
 	music_player.bus = "Music"
@@ -48,6 +56,24 @@ func _ready() -> void:
 	music_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(music_player)
 	# music_player.play()
+
+func load_settings() -> void:
+	if not FileAccess.file_exists("user://settings.save"):
+		for i in default_volume_levels.keys():
+			set_volume(i, default_volume_levels[i])
+	else:
+		pass
+
+func set_volume(bus: String, volume: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus), volume)
+
+func save_settings() -> void:
+	print("SAVED metaphorically")
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save_settings()
+		get_tree().quit()
 
 func update_time(value) -> void:
 	if not beat_game:

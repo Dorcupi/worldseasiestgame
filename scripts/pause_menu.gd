@@ -38,4 +38,4 @@ func _on_quit_button_pressed() -> void:
 	get_tree().current_scene.current_state = get_tree().current_scene.GAME_STATE.GAME_OVER
 	trans_animation_player.play("fade_out")
 	await trans_animation_player.animation_finished
-	get_tree().quit()
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)

@@ -3,6 +3,7 @@ extends Microgame
 @export var time_left_label: Label
 @export var timer: Timer
 @export var clicks_left_label: Label
+@export var audio_stream_player: AudioStreamPlayer
 
 
 var number_of_clicks_needed: float = randi_range(1, 12)
@@ -27,4 +28,8 @@ func _on_timer_timeout() -> void:
 
 func _on_button_pressed() -> void:
 	clicks -= 1
-		
+	if clicks < 0:
+		audio_stream_player.pitch_scale = 0.5
+	else:
+		audio_stream_player.pitch_scale = 1
+	audio_stream_player.play()

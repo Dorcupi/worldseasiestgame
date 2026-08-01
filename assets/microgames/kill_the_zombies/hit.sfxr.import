@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://62c8sis1pbkp"
+path="res://.godot/imported/hit.sfxr-3b882778c62170b9084ebaafee932f68.sample"
+
+[deps]
+
+source_file="res://assets/microgames/kill_the_zombies/hit.sfxr"
+dest_files=["res://.godot/imported/hit.sfxr-3b882778c62170b9084ebaafee932f68.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

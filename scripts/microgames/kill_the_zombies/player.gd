@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var bullet_spawn_position: Marker2D
 @export var speed = 300.0
 var can_move: bool = false
+@export var shoot_player: AudioStreamPlayer
+@export var enemy_hit_player: AudioStreamPlayer
 
 func _physics_process(delta: float) -> void:
 
@@ -29,4 +31,6 @@ func _physics_process(delta: float) -> void:
 func shoot() -> void:
 	var bul: Area2D = bullet.instantiate()
 	bul.transform = bullet_spawn_position.global_transform
+	bul.sound = enemy_hit_player
 	owner.add_child(bul)
+	shoot_player.play()

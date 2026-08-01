@@ -5,16 +5,18 @@
 [ext_resource type="Script" uid="uid://bixvnpp6deelb" path="res://scripts/microgames/collect_the_coins/player.gd" id="3_4un3l"]
 [ext_resource type="PackedScene" uid="uid://b5lof6v21pfq2" path="res://scenes/microgames/collect_the_coins/coin.tscn" id="5_ib2sg"]
 [ext_resource type="Texture2D" uid="uid://bimg0nll60l65" path="res://assets/characters/Man Brown/manBrown_stand.png" id="5_l4o01"]
+[ext_resource type="AudioStream" uid="uid://cw232jim3cm5" path="res://assets/microgames/collect_the_coins/coin_pickup.sfxr" id="6_nc35e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0803w"]
 radius = 35.057095
 
-[node name="CollectTheCoins" type="Node2D" unique_id=483264197 node_paths=PackedStringArray("player", "coin_spawner", "tile_map")]
+[node name="CollectTheCoins" type="Node2D" unique_id=483264197 node_paths=PackedStringArray("player", "coin_spawner", "tile_map", "coin_pickup_player")]
 script = ExtResource("1_ib2sg")
 player = NodePath("Player")
 coin = ExtResource("5_ib2sg")
 coin_spawner = NodePath("CoinSpawner")
 tile_map = NodePath("TileMapLayer")
+coin_pickup_player = NodePath("CoinPickupPlayer")
 game_name = "Collect the Coins"
 metadata/_custom_type_script = "uid://cfnntxqkpwn3k"
 
@@ -41,5 +43,11 @@ shape = SubResource("CircleShape2D_0803w")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=964241261]
 zoom = Vector2(0.75, 0.75)
+
+[node name="CoinPickupPlayer" type="AudioStreamPlayer" parent="." unique_id=1453814910]
+stream = ExtResource("6_nc35e")
+volume_db = -17.0
+max_polyphony = 10
+bus = &"Microgame Sound Effects"
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]

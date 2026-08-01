@@ -1,0 +1,201 @@
+[gd_scene format=3 uid="uid://exdekr522bmt"]
+
+[ext_resource type="Script" uid="uid://c2sgh6aagirrk" path="res://scripts/settings.gd" id="1_83j8s"]
+[ext_resource type="Shader" uid="uid://bs8efxd4ky7hr" path="res://shaders/stripes.gdshader" id="2_am25x"]
+[ext_resource type="PackedScene" uid="uid://impye5yvlb5y" path="res://scenes/settings/slider_volume_setting.tscn" id="4_gjs24"]
+[ext_resource type="FontFile" uid="uid://bf3vll2nksry7" path="res://assets/fonts/Gorditas-Bold.ttf" id="4_uhhto"]
+[ext_resource type="Texture2D" uid="uid://c8dhur41cbb8s" path="res://assets/ui/Yellow/Double/button_rectangle_depth_gradient.png" id="5_1g033"]
+[ext_resource type="Texture2D" uid="uid://drlop0hbsreos" path="res://assets/ui/Yellow/Double/button_rectangle_gradient.png" id="6_01roj"]
+[ext_resource type="Texture2D" uid="uid://dxufg508yo6xm" path="res://assets/ui/Yellow/Double/button_rectangle_flat.png" id="7_wqwn7"]
+[ext_resource type="Shader" uid="uid://b72u0bllgx3x2" path="res://shaders/transition.gdshader" id="8_oe2nd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqqt6"]
+shader = ExtResource("2_am25x")
+shader_parameter/color_gap = Color(0.9764706, 0.9098039, 0.63529414, 1)
+shader_parameter/color_stripe = Color(0.96371835, 0.87453634, 0.5058518, 1)
+shader_parameter/divisions = 12.0
+shader_parameter/stripe_bias = 2.0
+shader_parameter/speed = 0.1
+shader_parameter/angle = 0.58
+
+[sub_resource type="LabelSettings" id="LabelSettings_gis3k"]
+font = ExtResource("4_uhhto")
+font_size = 70
+outline_size = 24
+outline_color = Color(0.7058824, 0.5019608, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_am25x"]
+font = ExtResource("4_uhhto")
+font_size = 30
+outline_size = 10
+outline_color = Color(0.7058824, 0.5019608, 0, 1)
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gjs24"]
+font = ExtResource("4_uhhto")
+font_size = 40
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wu84c"]
+shader = ExtResource("8_oe2nd")
+shader_parameter/AspectRatio = 1.5
+shader_parameter/Diamonds = 10.0
+shader_parameter/pixel_size = 0.08
+shader_parameter/height = 1.0
+shader_parameter/disable_pixel = false
+
+[sub_resource type="Animation" id="Animation_jkv2x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_jbj1t"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ln24"]
+_data = {
+&"RESET": SubResource("Animation_jkv2x"),
+&"fade_out": SubResource("Animation_jbj1t")
+}
+
+[node name="Node2D" type="Node2D" unique_id=168202991 node_paths=PackedStringArray("trans_animation_player")]
+script = ExtResource("1_83j8s")
+trans_animation_player = NodePath("CanvasLayer2/AnimationPlayer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1146844043]
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=666156376]
+material = SubResource("ShaderMaterial_bqqt6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+mouse_filter = 2
+color = Color(0.9764706, 0.9098039, 0.63529414, 1)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1278408156]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=72706447]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=1992959674]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="SettingsLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=2136490920]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_gis3k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterVolume" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=687029954 instance=ExtResource("4_gjs24")]
+layout_mode = 2
+setting_name = "Master Volume"
+setting_description = "The volume of the game."
+bus_name = "Master"
+
+[node name="MusicVolume" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=53308024 instance=ExtResource("4_gjs24")]
+layout_mode = 2
+setting_name = "Music Volume"
+setting_description = "The volume of the music in the game."
+bus_name = "Music"
+
+[node name="MainSFXVolume" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=785446192 instance=ExtResource("4_gjs24")]
+layout_mode = 2
+setting_name = "Main SFX Volume"
+setting_description = "The volume of all sound effects except those in microgames."
+bus_name = "Sound Effects"
+
+[node name="MicrogameSFXVolume" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1492033084 instance=ExtResource("4_gjs24")]
+layout_mode = 2
+setting_name = "Microgame SFX"
+setting_description = "The volume of all sound effects in microgames."
+bus_name = "Microgame Sound Effects"
+
+[node name="SettingDescription" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1701078049]
+visible = false
+layout_mode = 2
+text = "Insert Description Here"
+label_settings = SubResource("LabelSettings_am25x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMenuButton" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=285050283]
+custom_minimum_size = Vector2(307.2, 102.4)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_1g033")
+texture_pressed = ExtResource("6_01roj")
+texture_disabled = ExtResource("7_wqwn7")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/BackToMenuButton" unique_id=691651751]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back to Menu"
+label_settings = SubResource("LabelSettings_gjs24")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1438618671]
+layer = 1000
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=36045374]
+material = SubResource("ShaderMaterial_wu84c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2" unique_id=1241941467]
+libraries/ = SubResource("AnimationLibrary_8ln24")
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]

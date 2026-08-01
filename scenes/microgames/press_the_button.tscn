@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bf3vll2nksry7" path="res://assets/fonts/Gorditas-Bold.ttf" id="5_e6i68"]
 [ext_resource type="Texture2D" uid="uid://c0yvyhei755t5" path="res://assets/ui/Green/Double/button_round_flat.png" id="5_eujch"]
 [ext_resource type="Shader" uid="uid://cintr6hiskgjj" path="res://shaders/crt.gdshader" id="7_wwah2"]
+[ext_resource type="AudioStream" uid="uid://gvvf75dcana5" path="res://assets/microgames/press_the_button/button_press.sfxr" id="8_eujch"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_yf5fn"]
 noise_type = 2
@@ -36,11 +37,12 @@ shader_parameter/flicker_intensity = 0.0
 shader_parameter/color_offset = 1.5
 shader_parameter/blur = 0.15
 
-[node name="PressTheButton" type="Node2D" unique_id=1731686494 node_paths=PackedStringArray("time_left_label", "timer", "clicks_left_label")]
+[node name="PressTheButton" type="Node2D" unique_id=1731686494 node_paths=PackedStringArray("time_left_label", "timer", "clicks_left_label", "audio_stream_player")]
 script = ExtResource("1_q38cy")
 time_left_label = NodePath("CanvasLayer/Button/TimeLeftLabel")
 timer = NodePath("Timer")
 clicks_left_label = NodePath("CanvasLayer/Button/Button/Label")
+audio_stream_player = NodePath("AudioStreamPlayer")
 game_name = "Press the Button"
 metadata/_custom_type_script = "uid://cfnntxqkpwn3k"
 
@@ -154,6 +156,12 @@ mouse_filter = 2
 [node name="Timer" type="Timer" parent="." unique_id=1939293852]
 wait_time = 2.0
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=735198103]
+stream = ExtResource("8_eujch")
+volume_db = -15.0
+max_polyphony = 10
+bus = &"Microgame Sound Effects"
 
 [connection signal="pressed" from="CanvasLayer/Button/Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

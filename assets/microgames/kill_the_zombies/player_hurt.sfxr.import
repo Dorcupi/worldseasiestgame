@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://btlw4xl5rpgoh"
+path="res://.godot/imported/player_hurt.sfxr-43dc439a764120805d957bd9e4dc8954.sample"
+
+[deps]
+
+source_file="res://assets/microgames/kill_the_zombies/player_hurt.sfxr"
+dest_files=["res://.godot/imported/player_hurt.sfxr-43dc439a764120805d957bd9e4dc8954.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

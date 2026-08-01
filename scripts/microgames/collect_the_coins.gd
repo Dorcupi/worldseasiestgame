@@ -4,6 +4,7 @@ extends Microgame
 @export var coin: PackedScene
 @export var coin_spawner: Node2D
 @export var tile_map: TileMapLayer
+@export var coin_pickup_player: AudioStreamPlayer
 
 func spawn_coins() -> void:
 	var safe_pos: bool = false
@@ -23,6 +24,7 @@ func _process(delta: float) -> void:
 		player.can_move = true
 
 func coin_pick_up() -> void:
+	coin_pickup_player.play()
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	if get_tree().get_node_count_in_group("coins") <= 0:

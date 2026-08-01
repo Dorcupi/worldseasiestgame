@@ -514,7 +514,7 @@ door_close_player = NodePath("SoundEffects/DoorClosePlayer")
 win_piano_player = NodePath("SoundEffects/WinPianoPlayer")
 lose_piano_player = NodePath("SoundEffects/LosePianoPlayer")
 clock_tick_player = NodePath("SoundEffects/ClockTickPlayer")
-heart_beat_player = NodePath("SoundEffects/HeartBeatPlayer")
+heart_beat_player = NodePath("SoundEffects/HearBeatPlayer")
 microgames = Array[PackedScene]([ExtResource("2_85g3d"), ExtResource("3_choun"), ExtResource("4_choun"), ExtResource("5_eb6dy"), ExtResource("6_trceg"), ExtResource("7_a8y0u")])
 starting_time = 30.0
 
@@ -839,34 +839,34 @@ libraries/ = SubResource("AnimationLibrary_muem4")
 [node name="ButtonAlarmPlayer" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1536721911]
 stream = ExtResource("16_jbj1t")
 volume_db = -12.5
-bus = &"Menu Sound Effects"
+bus = &"Main Scene Sound Effects"
 
 [node name="DoorOpenPlayer" type="AudioStreamPlayer" parent="SoundEffects" unique_id=525087993]
 stream = ExtResource("17_dp3eg")
 volume_db = -8.0
-bus = &"Menu Sound Effects"
+bus = &"Main Scene Sound Effects"
 
 [node name="DoorClosePlayer" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1633319130]
 stream = ExtResource("18_0ld40")
 volume_db = -10.0
-bus = &"Menu Sound Effects"
+bus = &"Main Scene Sound Effects"
 
 [node name="WinPianoPlayer" type="AudioStreamPlayer" parent="SoundEffects" unique_id=291763363]
 stream = ExtResource("19_0ld40")
-bus = &"Menu Sound Effects"
+bus = &"Main Scene Sound Effects"
 
 [node name="LosePianoPlayer" type="AudioStreamPlayer" parent="SoundEffects" unique_id=2033378645]
 stream = ExtResource("20_gqmmt")
-bus = &"Menu Sound Effects"
+bus = &"Main Scene Sound Effects"
 
 [node name="ClockTickPlayer" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1007348784]
 stream = ExtResource("26_2wyq8")
 volume_db = -22.5
-bus = &"Menu Sound Effects"
+bus = &"Main Scene Sound Effects"
 
-[node name="HeartBeatPlayer" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1117054756]
+[node name="HearBeatPlayer" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1117054756]
 stream = ExtResource("27_vxglm")
-bus = &"Menu Sound Effects"
+bus = &"Main Scene Sound Effects"
 
 [connection signal="pressed" from="PauseMenu/Control/Panel/VBoxContainer/ResumeButton" to="PauseMenu" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PauseMenu/Control/Panel/VBoxContainer/BackToMenuButton" to="PauseMenu" method="_on_back_to_menu_button_pressed"]

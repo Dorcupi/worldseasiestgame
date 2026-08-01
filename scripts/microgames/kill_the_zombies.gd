@@ -7,6 +7,8 @@ extends Microgame
 @export var accessories_tile_map: TileMapLayer
 @export var enemy: PackedScene
 @export var enemy_spawner: Node2D
+@export var player_hit_player: AudioStreamPlayer
+
 var lives_left: int = 3
 
 func _ready() -> void:
@@ -30,6 +32,7 @@ func hurt_player() -> void:
 		lives_left -= 1
 		print("%.0f lives left" % lives_left)
 		shake_screen()
+		player_hit_player.play()
 		if lives_left <= 0:
 			player.can_move = false
 			for i in get_tree().get_nodes_in_group("enemies"):
