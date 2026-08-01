@@ -48,7 +48,7 @@ var music_level: MUSIC_LEVEL = MUSIC_LEVEL.OFF:
 		update_level(value)
 
 func _ready() -> void:
-	load_settings()
+	load_game()
 	music_player = AudioStreamPlayer.new()
 	music_player.stream = music_resource
 	music_player.bus = "Music"
@@ -57,22 +57,60 @@ func _ready() -> void:
 	add_child(music_player)
 	# music_player.play()
 
+func load_game() -> void:
+	load_settings()
+
 func load_settings() -> void:
 	if not FileAccess.file_exists("user://settings.save"):
-		for i in default_volume_levels.keys():
-			set_volume(i, default_volume_levels[i])
+		print("No settings file, loading default settings")
+		load_default_settings()
 	else:
-		pass
+		var save_file = FileAccess.open("user://settings.save", FileAccess.READ)
+		var json_string: String = save_file.get_line()
+		var json: JSON = JSON.new()
+		var parse_result: Error = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			print("Loading default settings as backup")
+			load_default_settings()
+			return
+		var data: Dictionary = json.data
+		for i in data.keys():
+			if default_volume_levels.has(i):
+				print("Volume data, setting volume of bus")
+				set_volume(i, data[i])
+
+func load_default_settings() -> void:
+	print("Loading default volume levels")
+	for i in default_volume_levels.keys():
+		set_volume(i, default_volume_levels[i])
+
+func get_volume(bus: String) -> float:
+	return AudioServer.get_bus_volume_db(AudioServer.get_bus_index(bus))
 
 func set_volume(bus: String, volume: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus), volume)
 
+func save_game() -> void:
+	save_settings()
+
 func save_settings() -> void:
-	print("SAVED metaphorically")
+	var save_file: FileAccess = FileAccess.open("user://settings.save", FileAccess.WRITE)
+	var save_dict: Dictionary = save_settings_dict()
+	var json_string: String = JSON.stringify(save_dict)
+	save_file.store_line(json_string)
+
+func save_settings_dict() -> Dictionary:
+	var volumedict: Dictionary = default_volume_levels
+	for i in volumedict.keys():
+		volumedict[i] = get_volume(i)
+	var savedict: Dictionary = {}
+	savedict.merge(volumedict)
+	return savedict
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_settings()
+		save_game()
 		get_tree().quit()
 
 func update_time(value) -> void:
