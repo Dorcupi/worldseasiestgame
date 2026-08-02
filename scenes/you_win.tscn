@@ -79,9 +79,10 @@ _data = {
 &"fade_out": SubResource("Animation_jbj1t")
 }
 
-[node name="Node2D" type="Node2D" unique_id=2122611911 node_paths=PackedStringArray("time_spent_label", "new_pb_label")]
+[node name="Node2D" type="Node2D" unique_id=2122611911 node_paths=PackedStringArray("time_spent_label", "microgames_won_label", "new_pb_label")]
 script = ExtResource("1_077re")
 time_spent_label = NodePath("CanvasLayer/Control/VBoxContainer/TimeSpentLabel")
+microgames_won_label = NodePath("CanvasLayer/Control/VBoxContainer/MicrogamesWonLabel")
 new_pb_label = NodePath("CanvasLayer/Control/VBoxContainer/NewPBLabel")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=812679506]
@@ -132,7 +133,15 @@ label_settings = SubResource("LabelSettings_ktrfn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="MicrogamesWonLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer" unique_id=702568942]
+layout_mode = 2
+text = "Microgames Won: [s]"
+label_settings = SubResource("LabelSettings_ktrfn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="NewPBLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer" unique_id=1645097112]
+visible = false
 layout_mode = 2
 text = "New Personal Worst!"
 label_settings = SubResource("LabelSettings_ktrfn")

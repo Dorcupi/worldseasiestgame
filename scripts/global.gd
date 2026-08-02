@@ -24,7 +24,9 @@ var music_player: AudioStreamPlayer
 @onready var music_resource: AudioStreamSynchronized = preload("res://resources/music.tres")
 
 var highest_time: float
+var highest_microgames_won: int
 var current_time: float
+var current_microgames_won: int
 
 var beat_game: bool = false
 var beat_pb: bool = false
@@ -48,6 +50,7 @@ var music_level: MUSIC_LEVEL = MUSIC_LEVEL.OFF:
 		update_level(value)
 
 func _ready() -> void:
+	get_tree().set_auto_accept_quit(false)
 	load_game()
 	music_player = AudioStreamPlayer.new()
 	music_player.stream = music_resource
@@ -93,6 +96,7 @@ func set_volume(bus: String, volume: float) -> void:
 
 func save_game() -> void:
 	save_settings()
+	print("GAME SAVED")
 
 func save_settings() -> void:
 	var save_file: FileAccess = FileAccess.open("user://settings.save", FileAccess.WRITE)
@@ -113,13 +117,19 @@ func _notification(what: int) -> void:
 		save_game()
 		get_tree().quit()
 
-func update_time(value) -> void:
+func update_time(value, value2) -> void:
 	if not beat_game:
 		beat_game = true
 	times_played += 1
 	current_time = value
+	current_microgames_won = value2
 	if value > highest_time:
 		highest_time = value
+		highest_microgames_won = value2
+		beat_pb = true
+	elif value == highest_time and value2 > highest_microgames_won:
+		highest_time = value
+		highest_microgames_won = value2
 		beat_pb = true
 	else:
 		beat_pb = false

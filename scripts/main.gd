@@ -41,6 +41,7 @@ enum GAME_STATE {
 @onready var time_left: float = starting_time
 @onready var once_second_time: int = int(time_left)
 var time_spent: float = 0
+var microgames_won: int = 0
 var current_state: GAME_STATE = GAME_STATE.MAIN_SCENE
 var current_microgame: Microgame
 var add_amount: Array[float] = start_add_amount
@@ -68,7 +69,7 @@ func _process(delta: float) -> void:
 			GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.LEVEL_4
 		if time_left <= 0.0:
 			current_state = GAME_STATE.GAME_OVER
-			GlobalResources.update_time(time_spent)
+			GlobalResources.update_time(time_spent, microgames_won)
 			GlobalResources.music_transition_time = 2
 			trans_animation_player.play("fade_out")
 			await trans_animation_player.animation_finished
@@ -78,7 +79,6 @@ func _process(delta: float) -> void:
 			current_microgame.emit_signal("lose_game")
 
 func once_per_second() -> void:
-	print("TICK")
 	clock_tick_player.play()
 	if current_state == GAME_STATE.MINIGAME:
 		heart_beat_player.play()
@@ -136,6 +136,7 @@ func win_microgame() -> void:
 		print("WIN GAME")
 		var added_time: float = snapped(randf_range(add_amount[0], add_amount[1]), 0.5)
 		time_left += added_time
+		microgames_won += 1
 		once_second_time += ceil(added_time)
 		current_state = GAME_STATE.MOVING_BACK
 		door_close_player.play()
