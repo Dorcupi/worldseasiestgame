@@ -23,6 +23,9 @@ const LEVEL_PRESETS: Dictionary[MUSIC_LEVEL, Array] = {
 var music_player: AudioStreamPlayer
 @onready var music_resource: AudioStreamSynchronized = preload("res://resources/music.tres")
 
+var past_splash: bool = false
+var entered_settings: bool = false
+
 var highest_time: float
 var highest_microgames_won: int
 var current_time: float
@@ -95,7 +98,8 @@ func set_volume(bus: String, volume: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus), volume)
 
 func save_game() -> void:
-	save_settings()
+	if entered_settings:
+		save_settings()
 	print("GAME SAVED")
 
 func save_settings() -> void:
@@ -114,7 +118,8 @@ func save_settings_dict() -> Dictionary:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_game()
+		if past_splash:
+			save_game()
 		get_tree().quit()
 
 func update_time(value, value2) -> void:
