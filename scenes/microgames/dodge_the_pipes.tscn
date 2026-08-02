@@ -1,0 +1,601 @@
+[gd_scene format=3 uid="uid://636ybg82jgqt"]
+
+[ext_resource type="Script" uid="uid://b36dikcaoyqmc" path="res://scripts/microgames/dodge_the_pipes.gd" id="1_msllo"]
+[ext_resource type="Script" uid="uid://bc0avrm3uum12" path="res://scripts/microgames/dodge_the_pipes/player.gd" id="2_7dcm5"]
+[ext_resource type="Texture2D" uid="uid://c63cpegkt3iwj" path="res://assets/backgrounds/background_clouds.png" id="3_7dcm5"]
+[ext_resource type="Texture2D" uid="uid://nl5mpixqr3dx" path="res://assets/microgames/dodge_the_pipes/fly_a.png" id="4_msllo"]
+[ext_resource type="Texture2D" uid="uid://biuirgj7pgjfm" path="res://assets/microgames/dodge_the_pipes/fly_b.png" id="5_nf3k6"]
+[ext_resource type="Texture2D" uid="uid://q5xtq3nxnxn4" path="res://assets/microgames/dodge_the_pipes/hill_top.png" id="6_5iscu"]
+[ext_resource type="Script" uid="uid://dqg33rcdbtpsi" path="res://scripts/microgames/dodge_the_pipes/pipe.gd" id="6_wu5yp"]
+[ext_resource type="Texture2D" uid="uid://bdh1nsoq6jvp5" path="res://assets/microgames/dodge_the_pipes/hill.png" id="7_wu5yp"]
+[ext_resource type="Texture2D" uid="uid://csoqlysjm8gqc" path="res://assets/microgames/dodge_the_pipes/hill_top_smile.png" id="8_cuciq"]
+[ext_resource type="FontFile" uid="uid://bf3vll2nksry7" path="res://assets/fonts/Gorditas-Bold.ttf" id="10_cuciq"]
+
+[sub_resource type="Animation" id="Animation_msllo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:offset_transform_position_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect2:offset_transform_position_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nf3k6"]
+resource_name = "scroll"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:offset_transform_position_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect2:offset_transform_position_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fr3os"]
+_data = {
+&"RESET": SubResource("Animation_msllo"),
+&"scroll": SubResource("Animation_nf3k6")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
+radius = 66.09841
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_msllo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nf3k6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(1152, 143)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
+radius = 64.0
+height = 640.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(32, 267)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+font = ExtResource("10_cuciq")
+font_size = 80
+outline_size = 20
+outline_color = Color(0, 0, 0, 0.29411766)
+
+[node name="Dodge the Pipes" type="Node2D" unique_id=2063877584 node_paths=PackedStringArray("background_animation_player", "player", "score_label")]
+script = ExtResource("1_msllo")
+background_animation_player = NodePath("Background/AnimationPlayer")
+player = NodePath("Player")
+score_label = NodePath("CanvasLayer/ScoreLabel")
+game_name = "Dodge the Pipes!"
+metadata/_custom_type_script = "uid://cfnntxqkpwn3k"
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=1867722237]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=745218310]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("3_7dcm5")
+stretch_mode = 6
+
+[node name="TextureRect2" type="TextureRect" parent="Background" unique_id=315302785]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(1, 0)
+texture = ExtResource("3_7dcm5")
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background" unique_id=2030080904]
+libraries/ = SubResource("AnimationLibrary_fr3os")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=273790917 groups=["player"]]
+collision_mask = 7
+script = ExtResource("2_7dcm5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1076807241]
+shape = SubResource("CircleShape2D_yf5fn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1103625661]
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+frame_progress = 0.74444234
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="Player" unique_id=280048813 groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=345544667]
+shape = SubResource("CircleShape2D_yf5fn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Player" unique_id=253958445]
+rect = Rect2(-66, -66, 132, 132)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=393218669]
+
+[node name="TopBarrier" type="StaticBody2D" parent="." unique_id=698757271]
+position = Vector2(0, 434.5)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopBarrier" unique_id=1147028268]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="BottomBarrier" type="StaticBody2D" parent="." unique_id=1748883451]
+position = Vector2(0, -434.5)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBarrier" unique_id=1382626947]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Pipe" type="StaticBody2D" parent="." unique_id=501723747 groups=["pipes"]]
+position = Vector2(83, 0)
+script = ExtResource("6_wu5yp")
+starting_gap = -3
+
+[node name="Bottom0" type="Sprite2D" parent="Pipe" unique_id=103297510]
+position = Vector2(0, 640)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Bottom1" type="Sprite2D" parent="Pipe" unique_id=1446574326]
+position = Vector2(0, 512)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom2" type="Sprite2D" parent="Pipe" unique_id=2017295238]
+position = Vector2(0, 384)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom3" type="Sprite2D" parent="Pipe" unique_id=1932082278]
+position = Vector2(0, 256)
+texture = ExtResource("7_wu5yp")
+
+[node name="BottomFace" type="Sprite2D" parent="Pipe" unique_id=1258706008]
+position = Vector2(0, 128)
+texture = ExtResource("8_cuciq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe" unique_id=555008889]
+position = Vector2(0, 384)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Top3" type="Sprite2D" parent="Pipe" unique_id=469431015]
+position = Vector2(0, -256)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Top2" type="Sprite2D" parent="Pipe" unique_id=1383802802]
+position = Vector2(0, -384)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top1" type="Sprite2D" parent="Pipe" unique_id=1465561227]
+position = Vector2(0, -512)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top0" type="Sprite2D" parent="Pipe" unique_id=1795274088]
+position = Vector2(0, -640)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="TopFace" type="Sprite2D" parent="Pipe" unique_id=650313838]
+position = Vector2(0, -768)
+texture = ExtResource("8_cuciq")
+flip_h = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pipe" unique_id=1223399669]
+position = Vector2(0, -511)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Area2D" type="Area2D" parent="Pipe" unique_id=1336522839]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe/Area2D" unique_id=184922949]
+position = Vector2(0, -63.5)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Pipe" unique_id=1873517898]
+rect = Rect2(-66, -834, 132, 1540)
+
+[node name="Pipe2" type="StaticBody2D" parent="." unique_id=2032651964 groups=["pipes"]]
+position = Vector2(83, 0)
+script = ExtResource("6_wu5yp")
+
+[node name="Bottom0" type="Sprite2D" parent="Pipe2" unique_id=780826999]
+position = Vector2(0, 640)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Bottom1" type="Sprite2D" parent="Pipe2" unique_id=1659613760]
+position = Vector2(0, 512)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom2" type="Sprite2D" parent="Pipe2" unique_id=1661014076]
+position = Vector2(0, 384)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom3" type="Sprite2D" parent="Pipe2" unique_id=252759145]
+position = Vector2(0, 256)
+texture = ExtResource("7_wu5yp")
+
+[node name="BottomFace" type="Sprite2D" parent="Pipe2" unique_id=2073430161]
+position = Vector2(0, 128)
+texture = ExtResource("8_cuciq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe2" unique_id=1268503052]
+position = Vector2(0, 384)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Top3" type="Sprite2D" parent="Pipe2" unique_id=1769694919]
+position = Vector2(0, -256)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Top2" type="Sprite2D" parent="Pipe2" unique_id=1691156407]
+position = Vector2(0, -384)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top1" type="Sprite2D" parent="Pipe2" unique_id=1372344747]
+position = Vector2(0, -512)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top0" type="Sprite2D" parent="Pipe2" unique_id=1797041680]
+position = Vector2(0, -640)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="TopFace" type="Sprite2D" parent="Pipe2" unique_id=22038891]
+position = Vector2(0, -768)
+texture = ExtResource("8_cuciq")
+flip_h = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pipe2" unique_id=487783918]
+position = Vector2(0, -511)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Area2D" type="Area2D" parent="Pipe2" unique_id=460993653]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe2/Area2D" unique_id=673905990]
+position = Vector2(0, -63.5)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Pipe2" unique_id=819421679]
+rect = Rect2(-66, -834, 132, 1540)
+
+[node name="Pipe3" type="StaticBody2D" parent="." unique_id=222798500 groups=["pipes"]]
+position = Vector2(83, 0)
+script = ExtResource("6_wu5yp")
+starting_gap = 5
+
+[node name="Bottom0" type="Sprite2D" parent="Pipe3" unique_id=1250369476]
+position = Vector2(0, 640)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Bottom1" type="Sprite2D" parent="Pipe3" unique_id=1378832165]
+position = Vector2(0, 512)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom2" type="Sprite2D" parent="Pipe3" unique_id=1136934487]
+position = Vector2(0, 384)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom3" type="Sprite2D" parent="Pipe3" unique_id=1178677398]
+position = Vector2(0, 256)
+texture = ExtResource("7_wu5yp")
+
+[node name="BottomFace" type="Sprite2D" parent="Pipe3" unique_id=814453382]
+position = Vector2(0, 128)
+texture = ExtResource("8_cuciq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe3" unique_id=1086071486]
+position = Vector2(0, 384)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Top3" type="Sprite2D" parent="Pipe3" unique_id=2024293167]
+position = Vector2(0, -256)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Top2" type="Sprite2D" parent="Pipe3" unique_id=1189718834]
+position = Vector2(0, -384)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top1" type="Sprite2D" parent="Pipe3" unique_id=1039550233]
+position = Vector2(0, -512)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top0" type="Sprite2D" parent="Pipe3" unique_id=177601238]
+position = Vector2(0, -640)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="TopFace" type="Sprite2D" parent="Pipe3" unique_id=771253722]
+position = Vector2(0, -768)
+texture = ExtResource("8_cuciq")
+flip_h = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pipe3" unique_id=289358428]
+position = Vector2(0, -511)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Area2D" type="Area2D" parent="Pipe3" unique_id=1551347352]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe3/Area2D" unique_id=1381493549]
+position = Vector2(0, -63.5)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Pipe3" unique_id=504758136]
+rect = Rect2(-66, -834, 132, 1540)
+
+[node name="Pipe4" type="StaticBody2D" parent="." unique_id=686259872 groups=["pipes"]]
+position = Vector2(83, 0)
+script = ExtResource("6_wu5yp")
+starting_gap = 9
+
+[node name="Bottom0" type="Sprite2D" parent="Pipe4" unique_id=1738269353]
+position = Vector2(0, 640)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Bottom1" type="Sprite2D" parent="Pipe4" unique_id=843551777]
+position = Vector2(0, 512)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom2" type="Sprite2D" parent="Pipe4" unique_id=783506700]
+position = Vector2(0, 384)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom3" type="Sprite2D" parent="Pipe4" unique_id=919017014]
+position = Vector2(0, 256)
+texture = ExtResource("7_wu5yp")
+
+[node name="BottomFace" type="Sprite2D" parent="Pipe4" unique_id=277465767]
+position = Vector2(0, 128)
+texture = ExtResource("8_cuciq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe4" unique_id=1330723717]
+position = Vector2(0, 384)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Top3" type="Sprite2D" parent="Pipe4" unique_id=33071369]
+position = Vector2(0, -256)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Top2" type="Sprite2D" parent="Pipe4" unique_id=15826852]
+position = Vector2(0, -384)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top1" type="Sprite2D" parent="Pipe4" unique_id=1596152746]
+position = Vector2(0, -512)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top0" type="Sprite2D" parent="Pipe4" unique_id=508102495]
+position = Vector2(0, -640)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="TopFace" type="Sprite2D" parent="Pipe4" unique_id=182476645]
+position = Vector2(0, -768)
+texture = ExtResource("8_cuciq")
+flip_h = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pipe4" unique_id=218846651]
+position = Vector2(0, -511)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Area2D" type="Area2D" parent="Pipe4" unique_id=1322110372]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe4/Area2D" unique_id=1632456447]
+position = Vector2(0, -63.5)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Pipe4" unique_id=358302452]
+rect = Rect2(-66, -834, 132, 1540)
+
+[node name="Pipe5" type="StaticBody2D" parent="." unique_id=1103370483 groups=["pipes"]]
+position = Vector2(83, 0)
+script = ExtResource("6_wu5yp")
+starting_gap = 13
+
+[node name="Bottom0" type="Sprite2D" parent="Pipe5" unique_id=633237907]
+position = Vector2(0, 640)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Bottom1" type="Sprite2D" parent="Pipe5" unique_id=432535714]
+position = Vector2(0, 512)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom2" type="Sprite2D" parent="Pipe5" unique_id=1306083525]
+position = Vector2(0, 384)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom3" type="Sprite2D" parent="Pipe5" unique_id=1568928626]
+position = Vector2(0, 256)
+texture = ExtResource("7_wu5yp")
+
+[node name="BottomFace" type="Sprite2D" parent="Pipe5" unique_id=1227756579]
+position = Vector2(0, 128)
+texture = ExtResource("8_cuciq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe5" unique_id=46827103]
+position = Vector2(0, 384)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Top3" type="Sprite2D" parent="Pipe5" unique_id=1013623837]
+position = Vector2(0, -256)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Top2" type="Sprite2D" parent="Pipe5" unique_id=417484759]
+position = Vector2(0, -384)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top1" type="Sprite2D" parent="Pipe5" unique_id=2054761647]
+position = Vector2(0, -512)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top0" type="Sprite2D" parent="Pipe5" unique_id=39144169]
+position = Vector2(0, -640)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="TopFace" type="Sprite2D" parent="Pipe5" unique_id=768917582]
+position = Vector2(0, -768)
+texture = ExtResource("8_cuciq")
+flip_h = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pipe5" unique_id=2057949320]
+position = Vector2(0, -511)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Area2D" type="Area2D" parent="Pipe5" unique_id=1179330064]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe5/Area2D" unique_id=599693227]
+position = Vector2(0, -63.5)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Pipe5" unique_id=1543830515]
+rect = Rect2(-66, -834, 132, 1540)
+
+[node name="Pipe6" type="StaticBody2D" parent="." unique_id=1480485971 groups=["pipes"]]
+position = Vector2(83, 0)
+script = ExtResource("6_wu5yp")
+starting_gap = 17
+
+[node name="Bottom0" type="Sprite2D" parent="Pipe6" unique_id=906613732]
+position = Vector2(0, 640)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Bottom1" type="Sprite2D" parent="Pipe6" unique_id=711533512]
+position = Vector2(0, 512)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom2" type="Sprite2D" parent="Pipe6" unique_id=2030493579]
+position = Vector2(0, 384)
+texture = ExtResource("7_wu5yp")
+
+[node name="Bottom3" type="Sprite2D" parent="Pipe6" unique_id=1673919759]
+position = Vector2(0, 256)
+texture = ExtResource("7_wu5yp")
+
+[node name="BottomFace" type="Sprite2D" parent="Pipe6" unique_id=578780118]
+position = Vector2(0, 128)
+texture = ExtResource("8_cuciq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe6" unique_id=1681596176]
+position = Vector2(0, 384)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Top3" type="Sprite2D" parent="Pipe6" unique_id=1851308357]
+position = Vector2(0, -256)
+texture = ExtResource("6_5iscu")
+flip_v = true
+
+[node name="Top2" type="Sprite2D" parent="Pipe6" unique_id=1612916724]
+position = Vector2(0, -384)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top1" type="Sprite2D" parent="Pipe6" unique_id=1687493025]
+position = Vector2(0, -512)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="Top0" type="Sprite2D" parent="Pipe6" unique_id=592974751]
+position = Vector2(0, -640)
+texture = ExtResource("7_wu5yp")
+flip_v = true
+
+[node name="TopFace" type="Sprite2D" parent="Pipe6" unique_id=2081445746]
+position = Vector2(0, -768)
+texture = ExtResource("8_cuciq")
+flip_h = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pipe6" unique_id=927649256]
+position = Vector2(0, -511)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Area2D" type="Area2D" parent="Pipe6" unique_id=1969578035]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe6/Area2D" unique_id=1333246657]
+position = Vector2(0, -63.5)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Pipe6" unique_id=773486744]
+rect = Rect2(-66, -834, 132, 1540)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=827621967]
+layer = 2
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1718847921]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -137.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+vertical_alignment = 1
