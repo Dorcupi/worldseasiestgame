@@ -1,8 +1,10 @@
-[gd_scene format=3 uid="uid://doks8lxhyrwna"]
+[gd_scene format=3 uid="uid://clpm1ng02gkbo"]
 
 [ext_resource type="FontFile" uid="uid://bf3vll2nksry7" path="res://assets/fonts/Gorditas-Bold.ttf" id="1_jjhkg"]
 [ext_resource type="Script" uid="uid://bj6jjjcqrgyha" path="res://scripts/microgames/close_the_windows/window.gd" id="2_l5npx"]
 [ext_resource type="Texture2D" uid="uid://dcu7ysj8o1752" path="res://assets/microgames/close_the_windows/car.png" id="3_102iu"]
+[ext_resource type="Texture2D" uid="uid://dhj6t5e4li4e6" path="res://assets/ui/Grey/Double/icon_outline_cross.png" id="3_le5lm"]
+[ext_resource type="Texture2D" uid="uid://cnvgvii6cedx1" path="res://assets/ui/Grey/Double/icon_cross.png" id="3_yuv65"]
 [ext_resource type="Texture2D" uid="uid://s2xwtadtolc2" path="res://assets/microgames/close_the_windows/slime_block_jump.png" id="4_yuv65"]
 [ext_resource type="Texture2D" uid="uid://ckm1lns5gfhp1" path="res://assets/microgames/close_the_windows/character_pink_jump.png" id="5_le5lm"]
 [ext_resource type="Texture2D" uid="uid://ceexrsbujpl16" path="res://assets/microgames/close_the_windows/lock_red.png" id="6_8h2da"]
@@ -11,50 +13,122 @@
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
 font = ExtResource("1_jjhkg")
 font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_le5lm"]
+font = ExtResource("1_jjhkg")
+font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_jbehr"]
+[sub_resource type="LabelSettings" id="LabelSettings_8h2da"]
 font = ExtResource("1_jjhkg")
 font_size = 40
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_ffmfb"]
+[sub_resource type="LabelSettings" id="LabelSettings_pkuq6"]
+font = ExtResource("1_jjhkg")
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fa4fn"]
 font = ExtResource("1_jjhkg")
 font_size = 40
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_6mc0s"]
+[sub_resource type="LabelSettings" id="LabelSettings_p3i41"]
 font = ExtResource("1_jjhkg")
 font_size = 20
 
-[sub_resource type="LabelSettings" id="LabelSettings_2xswd"]
+[sub_resource type="LabelSettings" id="LabelSettings_d762a"]
 font = ExtResource("1_jjhkg")
 font_size = 40
 
-[sub_resource type="LabelSettings" id="LabelSettings_0kus5"]
+[sub_resource type="LabelSettings" id="LabelSettings_3d6yg"]
 font = ExtResource("1_jjhkg")
 font_size = 20
 
-[node name="Window" type="Window" unique_id=729002433 groups=["window"]]
-oversampling_override = 1.0
-title = "A Window"
-position = Vector2i(0, 36)
-size = Vector2i(300, 300)
-visible = false
-transient = true
-theme_override_fonts/title_font = ExtResource("1_jjhkg")
-script = ExtResource("2_l5npx")
-
-[node name="Your Car\'s Extended Warranty" type="Control" parent="." unique_id=770599218]
+[node name="Window" type="Control" unique_id=669159439 groups=["window"]]
 visible = false
 layout_mode = 3
+anchors_preset = 0
+offset_right = 500.0
+offset_bottom = 500.0
+script = ExtResource("2_l5npx")
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=2058971283]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.0627451, 0.0627451, 0.0627451, 0.72156864)
 
-[node name="ColorRect" type="ColorRect" parent="Your Car\'s Extended Warranty" unique_id=713909689]
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1763383861]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Control" type="Control" parent="MarginContainer2" unique_id=1708582781]
+layout_mode = 2
+
+[node name="TitleBar" type="ColorRect" parent="MarginContainer2/Control" unique_id=2058069444]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 75.0
+grow_horizontal = 2
+size_flags_vertical = 3
+color = Color(0.0627451, 0.0627451, 0.0627451, 0)
+
+[node name="TitleLabel" type="Label" parent="MarginContainer2/Control/TitleBar" unique_id=1978707643]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Window Title"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CloseButton" type="TextureButton" parent="MarginContainer2/Control/TitleBar" unique_id=1989987892]
+modulate = Color(0.50140655, 0.5014065, 0.5014065, 1)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("3_le5lm")
+texture_pressed = ExtResource("3_yuv65")
+
+[node name="WindowContent" type="MarginContainer" parent="MarginContainer2/Control" unique_id=1761758546]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 75
+
+[node name="Your Car\'s Extended Warranty" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=581825280]
+visible = false
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/Your Car\'s Extended Warranty" unique_id=1180802432]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,7 +136,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Your Car\'s Extended Warranty" unique_id=428475763]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/Control/WindowContent/Your Car\'s Extended Warranty" unique_id=1485792560]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,53 +148,48 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Your Car\'s Extended Warranty/MarginContainer" unique_id=213364770]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer2/Control/WindowContent/Your Car\'s Extended Warranty/MarginContainer" unique_id=1155123731]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Your Car\'s Extended Warranty/MarginContainer/ScrollContainer" unique_id=1087198440]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/Control/WindowContent/Your Car\'s Extended Warranty/MarginContainer/ScrollContainer" unique_id=1920237965]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Your Car\'s Extended Warranty/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1613312969]
+[node name="Label" type="Label" parent="MarginContainer2/Control/WindowContent/Your Car\'s Extended Warranty/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1797249028]
 layout_mode = 2
 text = "We Want To Talk To You About"
-label_settings = SubResource("LabelSettings_g4v7s")
+label_settings = SubResource("LabelSettings_le5lm")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="Your Car\'s Extended Warranty/MarginContainer/ScrollContainer/VBoxContainer" unique_id=334813660]
+[node name="Label2" type="Label" parent="MarginContainer2/Control/WindowContent/Your Car\'s Extended Warranty/MarginContainer/ScrollContainer/VBoxContainer" unique_id=637240981]
 layout_mode = 2
 text = "Your Car's Extended Warranty"
-label_settings = SubResource("LabelSettings_jbehr")
+label_settings = SubResource("LabelSettings_8h2da")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="Your Car\'s Extended Warranty/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1401544275]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/Control/WindowContent/Your Car\'s Extended Warranty/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1135561942]
 layout_mode = 2
 texture = ExtResource("3_102iu")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Button" type="Button" parent="Your Car\'s Extended Warranty/MarginContainer/ScrollContainer/VBoxContainer" unique_id=957412362 groups=["fail_button"]]
+[node name="Button" type="Button" parent="MarginContainer2/Control/WindowContent/Your Car\'s Extended Warranty/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1321919903 groups=["fail_button"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_jjhkg")
 theme_override_font_sizes/font_size = 30
 text = "Learn More"
 autowrap_mode = 3
 
-[node name="Your Computer Is Infected" type="Control" parent="." unique_id=2114829650]
+[node name="Your Computer Is Infected" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=380305231]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Your Computer Is Infected" unique_id=1928083534]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/Your Computer Is Infected" unique_id=1814913411]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,7 +198,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Your Computer Is Infected" unique_id=156965135]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/Control/WindowContent/Your Computer Is Infected" unique_id=811530496]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,31 +210,31 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Your Computer Is Infected/MarginContainer" unique_id=1978079220]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer2/Control/WindowContent/Your Computer Is Infected/MarginContainer" unique_id=2080331689]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Your Computer Is Infected/MarginContainer/ScrollContainer" unique_id=1566130288]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/Control/WindowContent/Your Computer Is Infected/MarginContainer/ScrollContainer" unique_id=2051083944]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Your Computer Is Infected/MarginContainer/ScrollContainer/VBoxContainer" unique_id=635912158]
+[node name="Label" type="Label" parent="MarginContainer2/Control/WindowContent/Your Computer Is Infected/MarginContainer/ScrollContainer/VBoxContainer" unique_id=337800524]
 layout_mode = 2
 text = "Your Computer Is"
-label_settings = SubResource("LabelSettings_g4v7s")
+label_settings = SubResource("LabelSettings_pkuq6")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="Your Computer Is Infected/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1086282]
+[node name="Label2" type="Label" parent="MarginContainer2/Control/WindowContent/Your Computer Is Infected/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2000700349]
 layout_mode = 2
 text = "Infected"
-label_settings = SubResource("LabelSettings_ffmfb")
+label_settings = SubResource("LabelSettings_fa4fn")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="Your Computer Is Infected/MarginContainer/ScrollContainer/VBoxContainer" unique_id=955919966]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/Control/WindowContent/Your Computer Is Infected/MarginContainer/ScrollContainer/VBoxContainer" unique_id=193664315]
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(0.8, 0.8)
@@ -173,31 +242,26 @@ texture = ExtResource("4_yuv65")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Label3" type="Label" parent="Your Computer Is Infected/MarginContainer/ScrollContainer/VBoxContainer" unique_id=608809982]
+[node name="Label3" type="Label" parent="MarginContainer2/Control/WindowContent/Your Computer Is Infected/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1266763943]
 layout_mode = 2
 text = "Click The Button Below To Fix It!"
-label_settings = SubResource("LabelSettings_g4v7s")
+label_settings = SubResource("LabelSettings_pkuq6")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="Your Computer Is Infected/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1440986349 groups=["fail_button"]]
+[node name="Button" type="Button" parent="MarginContainer2/Control/WindowContent/Your Computer Is Infected/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1571644281 groups=["fail_button"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_jjhkg")
 theme_override_font_sizes/font_size = 30
 text = "Delete Virus"
 autowrap_mode = 3
 
-[node name="Very Hot Women In Your Area (1km)" type="Control" parent="." unique_id=1792281495]
+[node name="Very Hot Women In Your Area (1km)" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=741354658]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Very Hot Women In Your Area (1km)" unique_id=1398945064]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/Very Hot Women In Your Area (1km)" unique_id=1335884648]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -206,7 +270,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.09724984, 0.3583526, 0.49653774, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Very Hot Women In Your Area (1km)" unique_id=215804800]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/Control/WindowContent/Very Hot Women In Your Area (1km)" unique_id=279011460]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -218,31 +282,31 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Very Hot Women In Your Area (1km)/MarginContainer" unique_id=1816721687]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer2/Control/WindowContent/Very Hot Women In Your Area (1km)/MarginContainer" unique_id=1683927907]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer" unique_id=916168637]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/Control/WindowContent/Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer" unique_id=1855862384]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1021484804]
+[node name="Label" type="Label" parent="MarginContainer2/Control/WindowContent/Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=997535649]
 layout_mode = 2
 text = "Very Hot Women Are"
-label_settings = SubResource("LabelSettings_6mc0s")
+label_settings = SubResource("LabelSettings_p3i41")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=940361091]
+[node name="Label2" type="Label" parent="MarginContainer2/Control/WindowContent/Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=96427749]
 layout_mode = 2
 text = "In Your Area"
-label_settings = SubResource("LabelSettings_2xswd")
+label_settings = SubResource("LabelSettings_d762a")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=135516475]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/Control/WindowContent/Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2130527038]
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0, -0.15)
@@ -250,31 +314,26 @@ texture = ExtResource("5_le5lm")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Label3" type="Label" parent="Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2092792085]
+[node name="Label3" type="Label" parent="MarginContainer2/Control/WindowContent/Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1916223038]
 layout_mode = 2
 text = "Press the Button To Meet Them!"
-label_settings = SubResource("LabelSettings_0kus5")
+label_settings = SubResource("LabelSettings_3d6yg")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1486941525 groups=["fail_button"]]
+[node name="Button" type="Button" parent="MarginContainer2/Control/WindowContent/Very Hot Women In Your Area (1km)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=921703275 groups=["fail_button"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_jjhkg")
 theme_override_font_sizes/font_size = 30
 text = "Go On A Date"
 autowrap_mode = 3
 
-[node name="You Have One New Message (14s)" type="Control" parent="." unique_id=253789384]
+[node name="You Have One New Message (14s)" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=1989285021]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="You Have One New Message (14s)" unique_id=2066639609]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/You Have One New Message (14s)" unique_id=1508911950]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -283,7 +342,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.7254902, 0.35686275, 0.49803922, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="You Have One New Message (14s)" unique_id=1062528441]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/Control/WindowContent/You Have One New Message (14s)" unique_id=801601115]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -295,31 +354,31 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="You Have One New Message (14s)/MarginContainer" unique_id=1696022532]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer2/Control/WindowContent/You Have One New Message (14s)/MarginContainer" unique_id=1931320471]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="You Have One New Message (14s)/MarginContainer/ScrollContainer" unique_id=528652121]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/Control/WindowContent/You Have One New Message (14s)/MarginContainer/ScrollContainer" unique_id=1754847361]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="You Have One New Message (14s)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1514974853]
+[node name="Label" type="Label" parent="MarginContainer2/Control/WindowContent/You Have One New Message (14s)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1183538176]
 layout_mode = 2
 text = "You Have One New Message"
-label_settings = SubResource("LabelSettings_6mc0s")
+label_settings = SubResource("LabelSettings_p3i41")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="You Have One New Message (14s)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1978238664]
+[node name="Label2" type="Label" parent="MarginContainer2/Control/WindowContent/You Have One New Message (14s)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=949740916]
 layout_mode = 2
 text = "She Wants You!"
-label_settings = SubResource("LabelSettings_2xswd")
+label_settings = SubResource("LabelSettings_d762a")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="You Have One New Message (14s)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1656262516]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/Control/WindowContent/You Have One New Message (14s)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=225288788]
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0, -0.15)
@@ -327,31 +386,26 @@ texture = ExtResource("5_le5lm")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Label3" type="Label" parent="You Have One New Message (14s)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1621937634]
+[node name="Label3" type="Label" parent="MarginContainer2/Control/WindowContent/You Have One New Message (14s)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=537345632]
 layout_mode = 2
 text = "Press the Button To Listen!"
-label_settings = SubResource("LabelSettings_0kus5")
+label_settings = SubResource("LabelSettings_3d6yg")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="You Have One New Message (14s)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1435301483 groups=["fail_button"]]
+[node name="Button" type="Button" parent="MarginContainer2/Control/WindowContent/You Have One New Message (14s)/MarginContainer/ScrollContainer/VBoxContainer" unique_id=286486695 groups=["fail_button"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_jjhkg")
 theme_override_font_sizes/font_size = 30
 text = "Listen"
 autowrap_mode = 3
 
-[node name="Your Computer Has Been Locked" type="Control" parent="." unique_id=1062148905]
+[node name="Your Computer Has Been Locked" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=1787607914]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Your Computer Has Been Locked" unique_id=312075999]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/Your Computer Has Been Locked" unique_id=1669385421]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -360,7 +414,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.034404244, 0.46164614, 0.99999994, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Your Computer Has Been Locked" unique_id=1259047188]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/Control/WindowContent/Your Computer Has Been Locked" unique_id=670039954]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -372,31 +426,31 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Your Computer Has Been Locked/MarginContainer" unique_id=526247459]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer2/Control/WindowContent/Your Computer Has Been Locked/MarginContainer" unique_id=1280375515]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Your Computer Has Been Locked/MarginContainer/ScrollContainer" unique_id=1365864889]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/Control/WindowContent/Your Computer Has Been Locked/MarginContainer/ScrollContainer" unique_id=1620770305]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Your Computer Has Been Locked/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1306779910]
+[node name="Label" type="Label" parent="MarginContainer2/Control/WindowContent/Your Computer Has Been Locked/MarginContainer/ScrollContainer/VBoxContainer" unique_id=740383164]
 layout_mode = 2
 text = "Your Computer Has Been"
-label_settings = SubResource("LabelSettings_6mc0s")
+label_settings = SubResource("LabelSettings_p3i41")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="Your Computer Has Been Locked/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1819405048]
+[node name="Label2" type="Label" parent="MarginContainer2/Control/WindowContent/Your Computer Has Been Locked/MarginContainer/ScrollContainer/VBoxContainer" unique_id=46024869]
 layout_mode = 2
 text = "Locked"
-label_settings = SubResource("LabelSettings_2xswd")
+label_settings = SubResource("LabelSettings_d762a")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="Your Computer Has Been Locked/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1424350296]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/Control/WindowContent/Your Computer Has Been Locked/MarginContainer/ScrollContainer/VBoxContainer" unique_id=929470738]
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(0.8, 0.8)
@@ -404,31 +458,26 @@ texture = ExtResource("6_8h2da")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Label3" type="Label" parent="Your Computer Has Been Locked/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1138333015]
+[node name="Label3" type="Label" parent="MarginContainer2/Control/WindowContent/Your Computer Has Been Locked/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1664647087]
 layout_mode = 2
 text = "Press The Button To Find Out Why"
-label_settings = SubResource("LabelSettings_0kus5")
+label_settings = SubResource("LabelSettings_3d6yg")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="Your Computer Has Been Locked/MarginContainer/ScrollContainer/VBoxContainer" unique_id=793729005 groups=["fail_button"]]
+[node name="Button" type="Button" parent="MarginContainer2/Control/WindowContent/Your Computer Has Been Locked/MarginContainer/ScrollContainer/VBoxContainer" unique_id=91373442 groups=["fail_button"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_jjhkg")
 theme_override_font_sizes/font_size = 30
 text = "Call Support"
 autowrap_mode = 3
 
-[node name="Gamble And Win Big!" type="Control" parent="." unique_id=488854264]
+[node name="Gamble And Win Big!" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=489105827]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Gamble And Win Big!" unique_id=212216986]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/Gamble And Win Big!" unique_id=464338672]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -437,7 +486,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.49580985, 0.02147735, 0, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Gamble And Win Big!" unique_id=1155873147]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/Control/WindowContent/Gamble And Win Big!" unique_id=102698185]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -449,49 +498,49 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Gamble And Win Big!/MarginContainer" unique_id=1763745444]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer2/Control/WindowContent/Gamble And Win Big!/MarginContainer" unique_id=845333800]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Gamble And Win Big!/MarginContainer/ScrollContainer" unique_id=108552647]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/Control/WindowContent/Gamble And Win Big!/MarginContainer/ScrollContainer" unique_id=2069690292]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Gamble And Win Big!/MarginContainer/ScrollContainer/VBoxContainer" unique_id=597183650]
+[node name="Label" type="Label" parent="MarginContainer2/Control/WindowContent/Gamble And Win Big!/MarginContainer/ScrollContainer/VBoxContainer" unique_id=660680526]
 layout_mode = 2
 text = "Gamble And Win"
-label_settings = SubResource("LabelSettings_6mc0s")
+label_settings = SubResource("LabelSettings_p3i41")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="Gamble And Win Big!/MarginContainer/ScrollContainer/VBoxContainer" unique_id=135502922]
+[node name="Label2" type="Label" parent="MarginContainer2/Control/WindowContent/Gamble And Win Big!/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2076556921]
 layout_mode = 2
 text = "BIG!"
-label_settings = SubResource("LabelSettings_2xswd")
+label_settings = SubResource("LabelSettings_d762a")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="Gamble And Win Big!/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1193089027]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/Control/WindowContent/Gamble And Win Big!/MarginContainer/ScrollContainer/VBoxContainer" unique_id=931829975]
 layout_mode = 2
 texture = ExtResource("7_pkuq6")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Label3" type="Label" parent="Gamble And Win Big!/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1035746821]
+[node name="Label3" type="Label" parent="MarginContainer2/Control/WindowContent/Gamble And Win Big!/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1660929505]
 layout_mode = 2
 text = "Sign Up And Start Gambling Today!"
-label_settings = SubResource("LabelSettings_0kus5")
+label_settings = SubResource("LabelSettings_3d6yg")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="Gamble And Win Big!/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1862622443 groups=["fail_button"]]
+[node name="Button" type="Button" parent="MarginContainer2/Control/WindowContent/Gamble And Win Big!/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1137006384 groups=["fail_button"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_jjhkg")
 theme_override_font_sizes/font_size = 30
 text = "Sign Up"
 autowrap_mode = 3
 
-[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="MarginContainer2/Control/TitleBar/CloseButton" to="." method="_on_close_requested"]

@@ -104,6 +104,9 @@ func spawn_microgame() -> void:
 	microgame.level = level
 	current_microgame = microgame
 	microgame_spawner.add_child(microgame)
+	if not microgame.is_node_ready():
+		print("HAVE TO WAIT FOR READY")
+		await microgame.ready
 
 func spawn_add_time_popup(text: String) -> void:
 	var popup = add_time_popup.instantiate()
