@@ -12,7 +12,7 @@ extends Microgame
 var lives_left: int = 3
 
 func _ready() -> void:
-	for i in range(6):
+	for i in range(randi_range(level, level + 2)):
 		summon_enemy()
 
 func _process(delta: float) -> void:

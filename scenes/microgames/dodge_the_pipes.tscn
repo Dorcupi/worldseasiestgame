@@ -150,7 +150,7 @@ shape = SubResource("CircleShape2D_yf5fn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1103625661]
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-frame_progress = 0.74444234
+frame_progress = 0.78953946
 flip_h = true
 
 [node name="Area2D" type="Area2D" parent="Player" unique_id=280048813 groups=["player"]]
@@ -180,7 +180,7 @@ shape = SubResource("RectangleShape2D_g4v7s")
 [node name="Pipe" type="StaticBody2D" parent="." unique_id=501723747 groups=["pipes"]]
 position = Vector2(83, 0)
 script = ExtResource("6_wu5yp")
-starting_gap = -3
+starting_gap = -5
 
 [node name="Bottom0" type="Sprite2D" parent="Pipe" unique_id=103297510]
 position = Vector2(0, 640)
@@ -248,6 +248,7 @@ rect = Rect2(-66, -834, 132, 1540)
 [node name="Pipe2" type="StaticBody2D" parent="." unique_id=2032651964 groups=["pipes"]]
 position = Vector2(83, 0)
 script = ExtResource("6_wu5yp")
+starting_gap = -1
 
 [node name="Bottom0" type="Sprite2D" parent="Pipe2" unique_id=780826999]
 position = Vector2(0, 640)
@@ -315,7 +316,7 @@ rect = Rect2(-66, -834, 132, 1540)
 [node name="Pipe3" type="StaticBody2D" parent="." unique_id=222798500 groups=["pipes"]]
 position = Vector2(83, 0)
 script = ExtResource("6_wu5yp")
-starting_gap = 5
+starting_gap = 3
 
 [node name="Bottom0" type="Sprite2D" parent="Pipe3" unique_id=1250369476]
 position = Vector2(0, 640)
@@ -383,7 +384,7 @@ rect = Rect2(-66, -834, 132, 1540)
 [node name="Pipe4" type="StaticBody2D" parent="." unique_id=686259872 groups=["pipes"]]
 position = Vector2(83, 0)
 script = ExtResource("6_wu5yp")
-starting_gap = 9
+starting_gap = 7
 
 [node name="Bottom0" type="Sprite2D" parent="Pipe4" unique_id=1738269353]
 position = Vector2(0, 640)
@@ -451,7 +452,7 @@ rect = Rect2(-66, -834, 132, 1540)
 [node name="Pipe5" type="StaticBody2D" parent="." unique_id=1103370483 groups=["pipes"]]
 position = Vector2(83, 0)
 script = ExtResource("6_wu5yp")
-starting_gap = 13
+starting_gap = 11
 
 [node name="Bottom0" type="Sprite2D" parent="Pipe5" unique_id=633237907]
 position = Vector2(0, 640)
@@ -519,7 +520,7 @@ rect = Rect2(-66, -834, 132, 1540)
 [node name="Pipe6" type="StaticBody2D" parent="." unique_id=1480485971 groups=["pipes"]]
 position = Vector2(83, 0)
 script = ExtResource("6_wu5yp")
-starting_gap = 17
+starting_gap = 15
 
 [node name="Bottom0" type="Sprite2D" parent="Pipe6" unique_id=906613732]
 position = Vector2(0, 640)

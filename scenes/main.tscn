@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://coa683yrec247" path="res://scripts/main.gd" id="1_tipki"]
 [ext_resource type="PackedScene" uid="uid://365du4231oro" path="res://scenes/microgames/do_nothing.tscn" id="2_85g3d"]
 [ext_resource type="Texture2D" uid="uid://cglb1yrg1i7yv" path="res://assets/ui/Yellow/Double/button_round_depth_gradient.png" id="2_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://ct6sa88rvillb" path="res://resources/add_time_popup.tscn" id="2_yq6so"]
 [ext_resource type="Script" uid="uid://3jxgqb5sdvh6" path="res://scripts/microgame_button.gd" id="3_85g3d"]
 [ext_resource type="PackedScene" uid="uid://bf66xf87r73mn" path="res://scenes/microgames/kill_the_zombies.tscn" id="3_choun"]
 [ext_resource type="Texture2D" uid="uid://4jxvkqlw1sgb" path="res://assets/ui/Yellow/Double/button_round_gradient.png" id="3_jyhfs"]
@@ -367,52 +368,80 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_0ld40"]
 length = 0.001
-tracks/0/type = "bezier"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset_transform_scale:x")
+tracks/0/path = NodePath(".:offset_transform_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
-tracks/1/type = "bezier"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:offset_transform_scale:y")
+tracks/1/path = NodePath(".:offset_transform_rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_gqmmt"]
 resource_name = "popup"
-tracks/0/type = "bezier"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset_transform_scale:x")
-tracks/0/interp = 1
+tracks/0/path = NodePath(".:offset_transform_scale")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 2, 2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.25, -0.033333335, -0.041666668, 0, 0, 0.25, -0.008333333, 0, 0, 0, 0.5, -0.03333333, -0.041666668, 0, 0, 0.5, -0.008333336, 0, 0, 0, 1, -0.03333333, -0.083333336, 0, 0, 0, -0.050000004, 0.16666667, 0, 0),
-"times": PackedFloat32Array(0, 0.2, 0.25, 0.45, 0.5, 0.7, 1)
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1), Vector2(1, 1), Vector2(2, 2)]
 }
-tracks/1/type = "bezier"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:offset_transform_scale:y")
-tracks/1/interp = 1
+tracks/1/path = NodePath(".:offset_transform_rotation")
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 2, 2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.25, -0.033333335, -0.041666668, 0, 0, 0.25, -0.008333333, 0, 0, 0, 0.5, -0.03333333, -0.041666668, 0, 0, 0.5, -0.008333336, 0, 0, 0, 1, -0.03333333, -0.083333336, 0, 0, 0, -0.050000004, 0.16666667, 0, 0),
-"times": PackedFloat32Array(0, 0.2, 0.25, 0.45, 0.5, 0.7, 1)
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.2831855]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yc10j"]
@@ -500,7 +529,7 @@ _data = {
 &"fade_out": SubResource("Animation_jbj1t")
 }
 
-[node name="Node2D" type="Node2D" unique_id=1679242793 node_paths=PackedStringArray("time_left_label", "microgame_button", "main_animation_player", "microgame_spawner", "game_name_popup", "level_up_popup", "pause_menu", "button_alarm_player", "door_open_player", "door_close_player", "win_piano_player", "lose_piano_player", "clock_tick_player", "heart_beat_player")]
+[node name="Node2D" type="Node2D" unique_id=1679242793 node_paths=PackedStringArray("time_left_label", "microgame_button", "main_animation_player", "microgame_spawner", "game_name_popup", "level_up_popup", "pause_menu", "popup_spawner", "button_alarm_player", "door_open_player", "door_close_player", "win_piano_player", "lose_piano_player", "clock_tick_player", "heart_beat_player")]
 script = ExtResource("1_tipki")
 time_left_label = NodePath("CanvasLayer/Control2/TimeLeftLabel")
 microgame_button = NodePath("CanvasLayer/Control/MicrogameButton")
@@ -509,6 +538,7 @@ microgame_spawner = NodePath("MicrogameSpawner")
 game_name_popup = NodePath("CanvasLayer/Control/GameNamePopup")
 level_up_popup = NodePath("CanvasLayer/Control/LevelUpPopup")
 pause_menu = NodePath("PauseMenu")
+popup_spawner = NodePath("CanvasLayer/PopupSpawner")
 button_alarm_player = NodePath("SoundEffects/ButtonAlarmPlayer")
 door_open_player = NodePath("SoundEffects/DoorOpenPlayer")
 door_close_player = NodePath("SoundEffects/DoorClosePlayer")
@@ -516,6 +546,7 @@ win_piano_player = NodePath("SoundEffects/WinPianoPlayer")
 lose_piano_player = NodePath("SoundEffects/LosePianoPlayer")
 clock_tick_player = NodePath("SoundEffects/ClockTickPlayer")
 heart_beat_player = NodePath("SoundEffects/HeartBeatPlayer")
+add_time_popup = ExtResource("2_yq6so")
 microgames = Array[PackedScene]([ExtResource("2_85g3d"), ExtResource("3_choun"), ExtResource("4_choun"), ExtResource("5_eb6dy"), ExtResource("6_trceg"), ExtResource("7_a8y0u"), ExtResource("8_2f3dj")])
 starting_time = 30.0
 
@@ -687,6 +718,8 @@ text = "30000000000"
 label_settings = SubResource("LabelSettings_g4v7s")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PopupSpawner" type="Node2D" parent="CanvasLayer" unique_id=841497248]
 
 [node name="MicrogameSpawner" type="Node2D" parent="." unique_id=1358850749]
 

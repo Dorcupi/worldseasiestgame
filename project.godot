@@ -34,6 +34,10 @@ GlobalResources="*uid://by1hfnayr4eyw"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/dvy/Documents/The World's Easiest Game/movie.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gdfxr/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg", "res://addons/screenshots/plugin.cfg")

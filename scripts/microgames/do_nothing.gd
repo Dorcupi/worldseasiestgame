@@ -1,6 +1,6 @@
 extends Microgame
 
-var time_left: float = randi_range(3, 5)
+var time_left: float = randi_range(level, level + 2)
 var game_on: bool = true
 
 func _ready() -> void:

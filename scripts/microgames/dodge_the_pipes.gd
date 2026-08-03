@@ -4,7 +4,7 @@ extends Microgame
 @export var player: CharacterBody2D
 @export var score_label: Label
 
-var passes_left: int = randi_range(4, 8)
+var passes_left: int = randi_range(level + 1, level + 3)
 
 var game_state: bool = false:
 	set(value):

@@ -16,7 +16,7 @@ func spawn_coins() -> void:
 
 func _ready() -> void:
 	player.connect("coin_picked_up", coin_pick_up)
-	for i in range(1, randi_range(5, 12)):
+	for i in range(randi_range(level + 1, level + 5)):
 		spawn_coins()
 
 func _process(delta: float) -> void:

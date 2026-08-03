@@ -6,7 +6,7 @@ extends Microgame
 @export var audio_stream_player: AudioStreamPlayer
 
 
-var number_of_clicks_needed: float = randi_range(1, 12)
+var number_of_clicks_needed: float = randi_range(level, level + 4)
 var clicks: float = number_of_clicks_needed
 
 func _ready() -> void:

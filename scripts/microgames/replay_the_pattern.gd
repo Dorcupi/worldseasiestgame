@@ -61,7 +61,7 @@ func move_in_pattern() -> void:
 		play_pattern(current_spot_in_pattern)
 
 func generate_pattern() -> Array[int]:
-	var length = randi_range(4, 8)
+	var length = randi_range(level + 1, level + 3)
 	var _pattern: Array[int] = []
 	for i in range(1, length):
 		var okay: bool = [true, false].pick_random()

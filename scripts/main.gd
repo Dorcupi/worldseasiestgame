@@ -23,6 +23,7 @@ enum GAME_STATE {
 @export var level_up_popup: Label
 @onready var trans_animation_player: AnimationPlayer = $CanvasLayer2/AnimationPlayer
 @export var pause_menu: CanvasLayer
+@export var popup_spawner: Node2D
 
 ## Audio Nodes
 @export var button_alarm_player: AudioStreamPlayer
@@ -34,6 +35,7 @@ enum GAME_STATE {
 @export var heart_beat_player: AudioStreamPlayer
 
 ## Variables
+@export var add_time_popup: PackedScene
 @export var microgames: Array[PackedScene]
 @onready var unplayed_microgames: Array[PackedScene] = microgames.duplicate()
 @export var starting_time: float = 60.0
@@ -52,7 +54,6 @@ func _ready() -> void:
 	GlobalResources.music_transition_time = 1
 	microgame_button.button.pressed.connect(start_microgame)
 	trans_animation_player.play_backwards("fade_out")
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -88,7 +89,7 @@ func _input(event: InputEvent) -> void:
 		pause_menu.trigger_pause()
 
 func spawn_microgame() -> void:
-	var microgame: Node
+	var microgame: Microgame
 	if not unplayed_microgames.is_empty():
 		var microgame_scene = unplayed_microgames.pick_random()
 		unplayed_microgames.erase(microgame_scene)
@@ -100,8 +101,16 @@ func spawn_microgame() -> void:
 		microgame = microgame_scene.instantiate()
 	microgame.win_game.connect(win_microgame)
 	microgame.lose_game.connect(lose_microgame)
+	microgame.level = level
 	current_microgame = microgame
 	microgame_spawner.add_child(microgame)
+
+func spawn_add_time_popup(text: String) -> void:
+	var popup = add_time_popup.instantiate()
+	popup.message = text
+	popup.global_position.x = randf_range(140, get_viewport_rect().size.x - 140)
+	popup.global_position.y = randf_range(140, get_viewport_rect().size.y - 140)
+	popup_spawner.add_child(popup)
 
 func level_up() -> void:
 	# insert code here to make game harder
@@ -138,6 +147,7 @@ func win_microgame() -> void:
 		time_left += added_time
 		microgames_won += 1
 		once_second_time += ceil(added_time)
+		spawn_add_time_popup("+%.1f" % added_time)
 		current_state = GAME_STATE.MOVING_BACK
 		door_close_player.play()
 		win_piano_player.play()

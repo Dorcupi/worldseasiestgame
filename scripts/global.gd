@@ -128,11 +128,11 @@ func update_time(value, value2) -> void:
 	times_played += 1
 	current_time = value
 	current_microgames_won = value2
-	if value > highest_time:
+	if floor(value) > floor(highest_time):
 		highest_time = value
 		highest_microgames_won = value2
 		beat_pb = true
-	elif value == highest_time and value2 > highest_microgames_won:
+	elif floor(value) == floor(highest_time) and value2 > highest_microgames_won:
 		highest_time = value
 		highest_microgames_won = value2
 		beat_pb = true
