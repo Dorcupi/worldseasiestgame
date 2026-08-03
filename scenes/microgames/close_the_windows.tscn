@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://hyxnrsvpcftw"]
+
+[ext_resource type="Script" uid="uid://cuamo4ml6jd4k" path="res://scripts/microgames/close_the_windows.gd" id="1_jbehr"]
+[ext_resource type="PackedScene" uid="uid://doks8lxhyrwna" path="res://scenes/microgames/close_the_windows/window.tscn" id="2_2xswd"]
+[ext_resource type="Texture2D" uid="uid://dpgkg48ve135u" path="res://assets/backgrounds/background_color_trees.png" id="3_r8041"]
+[ext_resource type="Texture2D" uid="uid://c8l35cf4xaspq" path="res://assets/microgames/close_the_windows/hud_player_helmet_green.png" id="4_tps5q"]
+[ext_resource type="FontFile" uid="uid://bf3vll2nksry7" path="res://assets/fonts/Gorditas-Bold.ttf" id="5_0kus5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yf5fn"]
+font = ExtResource("5_0kus5")
+font_size = 30
+
+[node name="CloseTheWindows" type="Node2D" unique_id=1540670632]
+script = ExtResource("1_jbehr")
+window_scene = ExtResource("2_2xswd")
+game_name = "Close the Windows!"
+metadata/_custom_type_script = "uid://cfnntxqkpwn3k"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=461668374]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1835586076]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_r8041")
+expand_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1800113554]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -82.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.0627451, 0.0627451, 0.0627451, 0.72156864)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ColorRect" unique_id=333464356]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_right = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ColorRect/MarginContainer" unique_id=1683053897]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ColorRect/MarginContainer/HBoxContainer" unique_id=1383108173]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_tps5q")
+expand_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/ColorRect/MarginContainer" unique_id=787484211]
+layout_mode = 2
+alignment = 2
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/ColorRect/MarginContainer/HBoxContainer2" unique_id=319882001]
+layout_mode = 2
+text = "TIME"
+label_settings = SubResource("LabelSettings_yf5fn")
+horizontal_alignment = 1
+vertical_alignment = 1
