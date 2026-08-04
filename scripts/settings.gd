@@ -5,6 +5,8 @@ extends Node2D
 
 func _ready() -> void:
 	GlobalResources.entered_settings = true
+	if !GlobalResources.past_splash:
+		GlobalResources.past_splash = true
 	trans_animation_player.play_backwards("fade_out")
 	if GlobalResources.music_level != GlobalResources.MUSIC_LEVEL.LEVEL_5:
 		GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.LEVEL_5

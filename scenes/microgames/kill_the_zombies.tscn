@@ -33,6 +33,17 @@ player_hit_player = NodePath("PlayerHitPlayer")
 game_name = "Kill the Zombies"
 metadata/_custom_type_script = "uid://cfnntxqkpwn3k"
 
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=748001330]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=1392056367]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.6117647, 0.7529412, 0.7607843, 1)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=840110721]
 layer = 2
 

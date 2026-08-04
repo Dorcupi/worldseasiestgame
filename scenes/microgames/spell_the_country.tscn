@@ -1,0 +1,210 @@
+[gd_scene format=3 uid="uid://b2ohk2c13ii0f"]
+
+[ext_resource type="Script" uid="uid://dbwj5udhbstiu" path="res://scripts/microgames/spell_the_country.gd" id="1_im143"]
+[ext_resource type="Texture2D" uid="uid://dreo6tdvcfk5q" path="res://assets/flags/AR.png" id="2_6gddc"]
+[ext_resource type="Shader" uid="uid://cre6kmwi4kowh" path="res://shaders/clouds.gdshader" id="2_xrsy0"]
+[ext_resource type="FontFile" uid="uid://bf3vll2nksry7" path="res://assets/fonts/Gorditas-Bold.ttf" id="3_1gf3p"]
+[ext_resource type="Texture2D" uid="uid://dkfxry0s8rcxg" path="res://assets/flags/AU.png" id="3_kyycn"]
+[ext_resource type="Texture2D" uid="uid://d3y3bjhxf867" path="res://assets/flags/CA.png" id="4_im143"]
+[ext_resource type="Texture2D" uid="uid://c3u7f7j2ml3fn" path="res://assets/flags/BE.png" id="4_lrhgq"]
+[ext_resource type="Texture2D" uid="uid://1s3eh00ms5un" path="res://assets/flags/BR.png" id="5_futn3"]
+[ext_resource type="Texture2D" uid="uid://3qy6pergacjv" path="res://assets/flags/CO.png" id="7_5j87u"]
+[ext_resource type="Texture2D" uid="uid://kkwl3ekrpayk" path="res://assets/flags/DK.png" id="8_bwy12"]
+[ext_resource type="Texture2D" uid="uid://d2qbd0d3abx5x" path="res://assets/flags/EG.png" id="9_bob2v"]
+[ext_resource type="Texture2D" uid="uid://b0d4nmwat6up0" path="res://assets/flags/FI.png" id="10_ml5ak"]
+[ext_resource type="Texture2D" uid="uid://rej6uen7t6sp" path="res://assets/flags/GB.png" id="11_c7eeg"]
+[ext_resource type="Texture2D" uid="uid://cdpr11y5vls8g" path="res://assets/flags/GH.png" id="12_1ofs5"]
+[ext_resource type="Texture2D" uid="uid://dwgu3cqrun0mi" path="res://assets/flags/GR.png" id="13_yeckp"]
+[ext_resource type="Texture2D" uid="uid://u3yrnkliro42" path="res://assets/flags/IE.png" id="14_20edq"]
+[ext_resource type="Texture2D" uid="uid://cqcevv8bda27s" path="res://assets/flags/JM.png" id="15_58ovv"]
+[ext_resource type="Texture2D" uid="uid://d1wvqu0ueayi8" path="res://assets/flags/JP.png" id="16_4ryxe"]
+[ext_resource type="Texture2D" uid="uid://ccqjrhneoii0s" path="res://assets/flags/KR.png" id="17_op5va"]
+[ext_resource type="Texture2D" uid="uid://csixp58bakvtg" path="res://assets/flags/NG.png" id="18_vlg0r"]
+[ext_resource type="Texture2D" uid="uid://calbxb04xmfcg" path="res://assets/flags/NO.png" id="19_yghga"]
+[ext_resource type="Texture2D" uid="uid://yv0o86l4bl6b" path="res://assets/flags/NP_transparent.png" id="20_6wvug"]
+[ext_resource type="Texture2D" uid="uid://bxdlkm713vk8i" path="res://assets/flags/PH.png" id="21_1v7bk"]
+[ext_resource type="Texture2D" uid="uid://b7qc5y3qm8nag" path="res://assets/flags/PL.png" id="22_viu01"]
+[ext_resource type="Texture2D" uid="uid://cvxgq5bwn2hg5" path="res://assets/flags/PS.png" id="23_f4f77"]
+[ext_resource type="Texture2D" uid="uid://dml6jlnxqmou6" path="res://assets/flags/RO.png" id="24_tdort"]
+[ext_resource type="Texture2D" uid="uid://cf4jhimfp3ved" path="res://assets/flags/RU.png" id="25_73ya1"]
+[ext_resource type="Texture2D" uid="uid://ckayxti2ohwop" path="res://assets/flags/SA.png" id="26_qhxa8"]
+[ext_resource type="Texture2D" uid="uid://bdui05xctka2r" path="res://assets/flags/SE.png" id="27_3mnfu"]
+[ext_resource type="Texture2D" uid="uid://r1kgnsk5mmgk" path="res://assets/flags/TZ.png" id="28_1230q"]
+[ext_resource type="Texture2D" uid="uid://byhuwux75dvms" path="res://assets/flags/US.png" id="29_ir5wp"]
+[ext_resource type="Texture2D" uid="uid://djysw2ypm4y0o" path="res://assets/planets/planet00.png" id="32_kyycn"]
+[ext_resource type="Texture2D" uid="uid://bvmiwg3ypq6i5" path="res://assets/planets/planet02.png" id="33_lrhgq"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7o4j0"]
+noise_type = 0
+frequency = 0.0446
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l2tpn"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_7o4j0")
+seamless = true
+invert = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_snptb"]
+noise_type = 0
+frequency = 0.0839
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mcwrq"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_snptb")
+seamless = true
+invert = true
+
+[sub_resource type="Gradient" id="Gradient_7pme1"]
+colors = PackedColorArray(0.099081896, 0.17761976, 0.2439155, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8krum"]
+gradient = SubResource("Gradient_7pme1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0g0hd"]
+shader = ExtResource("2_xrsy0")
+shader_parameter/pixelation = Vector2(1024, 1024)
+shader_parameter/cloud_noise1 = SubResource("NoiseTexture2D_l2tpn")
+shader_parameter/scroll_speed1 = Vector2(0.025, 0.05)
+shader_parameter/cloud_noise2 = SubResource("NoiseTexture2D_mcwrq")
+shader_parameter/scroll_speed2 = Vector2(-0.015, -0.004)
+shader_parameter/center_pos = Vector2(0.5, 0)
+shader_parameter/position_impact = 0.8499999810008
+shader_parameter/color_gardient = SubResource("GradientTexture1D_8krum")
+
+[sub_resource type="LabelSettings" id="LabelSettings_7o4j0"]
+font = ExtResource("3_1gf3p")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_it1g6"]
+font = ExtResource("3_1gf3p")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_twqvf"]
+font = ExtResource("3_1gf3p")
+font_size = 20
+font_color = Color(1, 1, 1, 0.3019608)
+
+[node name="SpellTheCountry" type="Node2D" unique_id=897834688]
+script = ExtResource("1_im143")
+countries = Dictionary[String, Texture]({
+"Argentina": ExtResource("2_6gddc"),
+"Australia": ExtResource("3_kyycn"),
+"Belgium": ExtResource("4_lrhgq"),
+"Brazil": ExtResource("5_futn3"),
+"Canada": ExtResource("4_im143"),
+"Columbia": ExtResource("7_5j87u"),
+"Denmark": ExtResource("8_bwy12"),
+"Egypt": ExtResource("9_bob2v"),
+"Finland": ExtResource("10_ml5ak"),
+"Ghana": ExtResource("12_1ofs5"),
+"Greece": ExtResource("13_yeckp"),
+"Ireland": ExtResource("14_20edq"),
+"Jamaica": ExtResource("15_58ovv"),
+"Japan": ExtResource("16_4ryxe"),
+"Nepal": ExtResource("20_6wvug"),
+"Nigeria": ExtResource("18_vlg0r"),
+"Norway": ExtResource("19_yghga"),
+"Palestine": ExtResource("23_f4f77"),
+"Philippines": ExtResource("21_1v7bk"),
+"Poland": ExtResource("22_viu01"),
+"Romania": ExtResource("24_tdort"),
+"Russia": ExtResource("25_73ya1"),
+"Saudi Arabia": ExtResource("26_qhxa8"),
+"South Korea": ExtResource("17_op5va"),
+"Sweden": ExtResource("27_3mnfu"),
+"Tanzania": ExtResource("28_1230q"),
+"United Kingdom": ExtResource("11_c7eeg"),
+"United States": ExtResource("29_ir5wp")
+})
+game_name = "Spell the Country!"
+metadata/_custom_type_script = "uid://cfnntxqkpwn3k"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1086333589]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=601636584]
+material = SubResource("ShaderMaterial_0g0hd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(9.62615e-08, 0.21714625, 0.33402902, 1)
+
+[node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=107301468]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -244.0
+offset_right = 244.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/CenterContainer" unique_id=249802664]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "What Is This Country?"
+label_settings = SubResource("LabelSettings_7o4j0")
+
+[node name="HintLabel" type="Label" parent="CanvasLayer/CenterContainer" unique_id=1124901690]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "C_____"
+label_settings = SubResource("LabelSettings_it1g6")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer" unique_id=1166050357]
+layout_mode = 2
+texture = ExtResource("4_im143")
+stretch_mode = 5
+
+[node name="EnterArea" type="LineEdit" parent="CanvasLayer/CenterContainer" unique_id=1074293444]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_1gf3p")
+placeholder_text = "Country Name"
+alignment = 1
+context_menu_enabled = false
+emoji_menu_enabled = false
+clear_button_enabled = true
+drag_and_drop_selection_enabled = false
+
+[node name="TimeLeftLabel" type="Label" parent="CanvasLayer/CenterContainer" unique_id=1300589330]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "5.00"
+label_settings = SubResource("LabelSettings_twqvf")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=575422544]
+modulate = Color(1, 1, 1, 0.40392157)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -398.0
+offset_right = 398.0
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.25, 0.25)
+texture = ExtResource("32_kyycn")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+flip_v = true
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer" unique_id=681578579]
+modulate = Color(1, 1, 1, 0.2627451)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -398.0
+offset_bottom = 398.0
+grow_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.25, -0.25)
+texture = ExtResource("33_lrhgq")
+expand_mode = 1
+stretch_mode = 4
+
+[connection signal="text_changed" from="CanvasLayer/CenterContainer/EnterArea" to="." method="_on_enter_area_text_changed"]
