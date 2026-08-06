@@ -30,6 +30,7 @@ func spawn_windows() -> void:
 	windows_spawned = true
 
 func make_windows_appear() -> void:
+	made_windows_appear = true
 	var current_window: int = 0
 	windows_made_appear = [false]
 	windows_closed = [false]
@@ -42,7 +43,6 @@ func make_windows_appear() -> void:
 		windows_made_appear[current_window] = true
 		current_window += 1
 		await get_tree().physics_frame
-	made_windows_appear = true
 
 func close_window(window: Control) -> void:
 	windows_closed[get_tree().get_nodes_in_group("window").find(window)] = true

@@ -28,8 +28,8 @@ func _ready() -> void:
 func spawn() -> void:
 	size.x = randi_range(300, 700)
 	size.y = randi_range(300, 700)
-	global_position.x = randi_range(0 - int(size.x / 2), get_viewport_rect().size.x - int(size.x / 2))
-	global_position.y = randi_range(0, get_viewport_rect().size.y - 83)
+	global_position.x = randf_range(0 - int(size.x / 2), get_viewport_rect().size.x - int(size.x / 2))
+	global_position.y = randf_range(0, get_viewport_rect().size.y - 83)
 	for i in window_content.get_children():
 		i.visible = false
 	var b = window_content.get_children().pick_random()
