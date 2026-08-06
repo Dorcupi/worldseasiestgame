@@ -92,22 +92,33 @@ func _input(event: InputEvent) -> void:
 func spawn_microgame() -> void:
 	var microgame: Microgame
 	if not unplayed_microgames.is_empty():
+		print("NO LEVEL UP NEEDED, PICKING GAME")
 		var microgame_scene = unplayed_microgames.pick_random()
 		unplayed_microgames.erase(microgame_scene)
+		print("DONE, INSTANCING GAME")
 		microgame = microgame_scene.instantiate()
 	else:
+		print("LEVEL UP NEEDED, WAITING FOR LEVEL UP")
 		await level_up()
+		print("DONE, PICKING GAME")
 		var microgame_scene = unplayed_microgames.pick_random()
 		unplayed_microgames.erase(microgame_scene)
+		print("DONE, INSTANCING GAME")
 		microgame = microgame_scene.instantiate()
+	print("DONE, CONNECTING SIGNALS")
 	microgame.win_game.connect(win_microgame)
 	microgame.lose_game.connect(lose_microgame)
+	print("DONE, TELLING MICROGAME LEVEL")
 	microgame.level = level
+	print("DONE, SETTING MICROGAME AS CURRENT MICROGAME")
 	current_microgame = microgame
+	print("DONE, ADDING MICROGAME AS CHILD")
 	microgame_spawner.add_child(microgame)
+	print("DONE, CHECKING TO SEE IF READY")
 	if not microgame.is_node_ready():
 		print("HAVE TO WAIT FOR READY")
 		await microgame.ready
+	print("DONE DONE MICROGAME SPAWNING")
 
 func spawn_add_time_popup(text: String) -> void:
 	var popup = add_time_popup.instantiate()
@@ -134,19 +145,25 @@ func despawn_microgame() -> void:
 func start_microgame() -> void:
 	if current_state == GAME_STATE.MAIN_SCENE:
 		current_state = GAME_STATE.MINIGAME
+		print("SPAWNING MICROGAME")
 		await spawn_microgame()
+		print("FINISHED, ADJUSTING MUSIC")
 		if GlobalResources.music_level != GlobalResources.MUSIC_LEVEL.LEVEL_2:
 			GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.LEVEL_2
+		print("FINISHED, SPAWNING POPUP")
 		game_name_popup.text = current_microgame.game_name
 		game_name_popup.get_node("AnimationPlayer").play("appear")
+		print("FINISHED, OPENING DOOR")
 		door_open_player.play()
 		main_animation_player.play("break_apart")
+		print("FINISHED, WAITING FOR DOOR TO OPEN")
 		await main_animation_player.animation_finished
+		print("FINISHED, SETTING GAME PLAYING TO TRUE")
 		current_microgame.game_playing = true
+		print("DONE FINISHED DONE")
 
 func win_microgame() -> void:
 	if current_state == GAME_STATE.MINIGAME:
-		print("WIN GAME")
 		var added_time: float = snapped(randf_range(add_amount[0], add_amount[1]), 0.5)
 		time_left += added_time
 		microgames_won += 1
@@ -162,7 +179,6 @@ func win_microgame() -> void:
 
 func lose_microgame() -> void:
 	if current_state == GAME_STATE.MINIGAME:
-		print("LOSE GAME")
 		current_state = GAME_STATE.MOVING_BACK
 		door_close_player.play()
 		lose_piano_player.play()

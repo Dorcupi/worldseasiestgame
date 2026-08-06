@@ -20,28 +20,43 @@ var current_mouse: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print("RUNNING SPAWN FUNCTION")
 	spawn()
+	print("DONE RUNNING SPAWN FUNCTION, ADDING SIGNALS")
 	title_bar.mouse_entered.connect(titlebar_mouse.bind(true))
 	title_bar.mouse_exited.connect(titlebar_mouse.bind(false))
 	title_bar.gui_input.connect(titlebar_input)
+	print("DONE ADDING SIGNALS, DONE DONE")
 
-func spawn() -> void:
+func spawn() -> void: # might be where the crashes are coming from
+	print("UPDATING X SIZE")
 	size.x = randi_range(300, 700)
+	print("DONE, UPDATING Y SIZE")
 	size.y = randi_range(300, 700)
+	print("DONE, UPDATING X POSITION")
 	global_position.x = randf_range(0 - int(size.x / 2), get_viewport_rect().size.x - int(size.x / 2))
+	print("DONE, UPDATING Y POSITION")
 	global_position.y = randf_range(63, get_viewport_rect().size.y - 83)
+	print("DONE, CHOOSING INNER CONTENT, FIRST REMOVING CHILDS")
 	var content: Array = []
+	print("MADE ARRAY FOR CONTENT")
 	for i in window_content.get_children():
 		content.append(i)
+		print("APPENDED CONTENT WITH A CONTENT, REMOVING CHILD")
 		window_content.remove_child(i)
+		print("REMOVED CHILD")
+	print("DONE, PICKING RANDOM CONTENT")
 	var b = content.pick_random()
+	print("DONE, MAKING CONTENT VISIBLE")
 	b.visible = true
+	print("DONE, MAKING TITLEBAR MATCH CONTENT")
 	title = b.name
+	print("DONE, ADDING CHILD")
 	window_content.add_child(b)
+	print("DONE")
 
 func titlebar_mouse(change: bool) -> void:
 	mouse_in_titlebar = change
-	print(change)
 
 func titlebar_input(event: InputEvent) -> void:
 	if event.is_action_pressed("grab_titlebar") and mouse_held == false:
