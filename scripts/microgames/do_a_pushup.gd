@@ -42,7 +42,7 @@ func _on_button_pressed() -> void:
 		if current_value >= 100:
 			current_value = 100
 			game_playing = false
-			timer.start(0.5)
+			timer.start(0.25)
 
 
 func _on_timer_timeout() -> void:
