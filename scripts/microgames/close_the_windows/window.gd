@@ -30,11 +30,14 @@ func spawn() -> void:
 	size.y = randi_range(300, 700)
 	global_position.x = randf_range(0 - int(size.x / 2), get_viewport_rect().size.x - int(size.x / 2))
 	global_position.y = randf_range(63, get_viewport_rect().size.y - 83)
+	var content: Array = []
 	for i in window_content.get_children():
-		i.visible = false
-	var b = window_content.get_children().pick_random()
+		content.append(i)
+		window_content.remove_child(i)
+	var b = content.pick_random()
 	b.visible = true
 	title = b.name
+	window_content.add_child(b)
 
 func titlebar_mouse(change: bool) -> void:
 	mouse_in_titlebar = change

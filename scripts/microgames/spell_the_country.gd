@@ -39,6 +39,6 @@ func _process(delta: float) -> void:
 
 
 func _on_enter_area_text_changed(new_text: String) -> void:
-	if new_text == correct_answer and game_playing:
+	if new_text.to_lower() == correct_answer.to_lower() and game_playing:
 		game_playing = false
 		win_game.emit()

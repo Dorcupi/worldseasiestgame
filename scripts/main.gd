@@ -74,6 +74,7 @@ func _process(delta: float) -> void:
 			GlobalResources.music_transition_time = 2
 			trans_animation_player.play("fade_out")
 			await trans_animation_player.animation_finished
+			if lose_piano_player.playing: await lose_piano_player.finished
 			get_tree().change_scene_to_file("res://scenes/you_win.tscn")
 	elif current_state == GAME_STATE.MINIGAME:
 		if time_left <= 0.0:

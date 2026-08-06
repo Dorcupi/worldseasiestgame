@@ -29,6 +29,7 @@ func spawn_windows() -> void:
 		b.won_window.connect(close_window)
 		windows.append(b)
 	windows_spawned = true
+	make_windows_appear()
 
 func make_windows_appear() -> void:
 	made_windows_appear = true
@@ -47,7 +48,7 @@ func make_windows_appear() -> void:
 			await i.ready
 		windows_made_appear[current_window] = true
 		current_window += 1
-		await get_tree().physics_frame
+		# await get_tree().physics_frame
 	for i in get_tree().get_nodes_in_group("fail_button"):
 		i.pressed.connect(pressed_lose_button)
 
@@ -69,4 +70,5 @@ func pressed_lose_button() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if game_playing and not made_windows_appear and windows_spawned:
+		made_windows_appear = true
 		make_windows_appear()

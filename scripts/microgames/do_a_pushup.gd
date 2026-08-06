@@ -7,10 +7,15 @@ var left_zero: bool = false
 @onready var player: TextureRect = $CanvasLayer/HBoxContainer/Control/Player
 @onready var progress_bar: ProgressBar = $CanvasLayer/Control/ProgressBar
 @onready var timer: Timer = $Timer
+@onready var breath_in_player: AudioStreamPlayer = $BreathInPlayer
+@onready var breath_out_player: AudioStreamPlayer = $BreathOutPlayer
+@onready var animation_player: AnimationPlayer = $CanvasLayer/HBoxContainer/Control/AnimationPlayer
 
 @export var empty_image: Texture
 @export var half_image: Texture
 @export var full_image: Texture
+
+var breathed_out: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,6 +42,14 @@ func _process(delta: float) -> void:
 
 
 func _on_button_pressed() -> void:
+	if breathed_out:
+		breath_in_player.play()
+		breathed_out = false
+	else:
+		breath_out_player.play()
+		breathed_out = true
+	if animation_player.is_playing(): animation_player.stop()
+	animation_player.play("shake")
 	if game_playing:
 		current_value += button_worth
 		if current_value >= 100:
