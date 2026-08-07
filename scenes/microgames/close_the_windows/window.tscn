@@ -47,7 +47,6 @@ font = ExtResource("1_jjhkg")
 font_size = 20
 
 [node name="Window" type="Control" unique_id=669159439 groups=["window"]]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("2_l5npx")
@@ -73,16 +72,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Control" type="Control" parent="MarginContainer2" unique_id=1708582781]
+[node name="Control" type="VBoxContainer" parent="MarginContainer2" unique_id=1015661978]
 layout_mode = 2
 
 [node name="TitleBar" type="ColorRect" parent="MarginContainer2/Control" unique_id=2058069444]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 75.0
-grow_horizontal = 2
-size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
 color = Color(0.0627451, 0.0627451, 0.0627451, 0)
 
 [node name="TitleLabel" type="Label" parent="MarginContainer2/Control/TitleBar" unique_id=1978707643]
@@ -112,19 +107,19 @@ size_flags_horizontal = 3
 texture_normal = ExtResource("3_le5lm")
 texture_pressed = ExtResource("3_yuv65")
 
-[node name="WindowContent" type="MarginContainer" parent="MarginContainer2/Control" unique_id=1761758546]
+[node name="WindowContent" type="Control" parent="MarginContainer2/Control" unique_id=60318997]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Your Car\'s Extended Warranty" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=581825280]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_top = 75
-
-[node name="Your Car\'s Extended Warranty" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=581825280]
-visible = false
-layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/Your Car\'s Extended Warranty" unique_id=1180802432]
 layout_mode = 1
@@ -185,7 +180,12 @@ autowrap_mode = 3
 
 [node name="Your Computer Is Infected" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=380305231]
 visible = false
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/Your Computer Is Infected" unique_id=1814913411]
 layout_mode = 1
@@ -257,7 +257,12 @@ autowrap_mode = 3
 
 [node name="Very Hot Women In Your Area (1km)" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=741354658]
 visible = false
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/Very Hot Women In Your Area (1km)" unique_id=1335884648]
 layout_mode = 1
@@ -329,7 +334,12 @@ autowrap_mode = 3
 
 [node name="You Have One New Message (14s)" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=1989285021]
 visible = false
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/You Have One New Message (14s)" unique_id=1508911950]
 layout_mode = 1
@@ -401,7 +411,12 @@ autowrap_mode = 3
 
 [node name="Your Computer Has Been Locked" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=1787607914]
 visible = false
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/Your Computer Has Been Locked" unique_id=1669385421]
 layout_mode = 1
@@ -473,7 +488,12 @@ autowrap_mode = 3
 
 [node name="Gamble And Win Big!" type="Control" parent="MarginContainer2/Control/WindowContent" unique_id=489105827]
 visible = false
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer2/Control/WindowContent/Gamble And Win Big!" unique_id=464338672]
 layout_mode = 1

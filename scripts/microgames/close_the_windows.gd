@@ -9,7 +9,7 @@ var windows_closed: Array = []
 var windows: Array = []
 
 @onready var time_label: Label = $CanvasLayer/ColorRect/MarginContainer/HBoxContainer2/TimeLabel
-
+@onready var window_holder: Node2D = $WindowHolder
 @onready var time_dict = Time.get_time_dict_from_system()
 
 # Called when the node enters the scene tree for the first time.
@@ -42,25 +42,20 @@ func make_windows_appear() -> void:
 	made_windows_appear = true
 	var current_window: int = 0
 	print("SET VARIABLES")
-	windows_made_appear = [false]
-	windows_closed = [false]
-	print("STARTING ARRAY POPULATION, WINDOWS ARRAY SIZE IS %.0f" % windows.size())
-	while windows_made_appear.size() < windows.size():
-		print("WINDOWS MADE APPEAR SIZE IS %.0f" % windows_made_appear.size())
-		windows_made_appear.append(false)
-		windows_closed.append(false)
-		print("APPENDED")
-	print("DONE MAKING WINDOWS VISIBLE")
+	windows_made_appear.clear()
+	windows_closed.clear()
 	for i in windows:
+		windows_made_appear.append(true)
+		windows_closed.append(false)
+		print("UPDATED ARRAY")
+		window_holder.add_child(i)
+		print("ADDED CHILD")
 		i.visible = true
 		print("MADE VISIBLE")
 		i.current_state = true
 		print("SET CURRENT STATE TO TRUE")
-		call_deferred("add_child", i)
-		print("ADDED CHILD")
-		windows_made_appear[current_window] = true
 		current_window += 1
-		print("UPDATED ARRAY AND ADDED ONE TO CURRENT WINDOW")
+		print("ADDED ONE TO CURRENT WINDOW")
 	print("DONE, ADDING FAIL BUTTON SIGNALS")
 	for i in get_tree().get_nodes_in_group("fail_button"):
 		i.pressed.connect(pressed_lose_button)
@@ -77,8 +72,9 @@ func close_window(window: Control) -> void:
 
 func pressed_lose_button() -> void:
 	for i in windows:
-		remove_child(i)
-		i.current_state = false
+		if is_instance_valid(i):
+			i.current_state = false
+			i.queue_free()
 	lose_game.emit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

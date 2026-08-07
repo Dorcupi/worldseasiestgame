@@ -67,3 +67,5 @@ text = "TIME"
 label_settings = SubResource("LabelSettings_yf5fn")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="WindowHolder" type="Node2D" parent="." unique_id=1134631939]

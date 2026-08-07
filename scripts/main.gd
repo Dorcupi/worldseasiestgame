@@ -77,7 +77,7 @@ func _process(delta: float) -> void:
 			if lose_piano_player.playing: await lose_piano_player.finished
 			get_tree().change_scene_to_file("res://scenes/you_win.tscn")
 	elif current_state == GAME_STATE.MINIGAME:
-		if time_left <= 0.0:
+		if time_left <= 0.0 and current_microgame and current_microgame.game_playing:
 			current_microgame.emit_signal("lose_game")
 
 func once_per_second() -> void:
@@ -90,13 +90,12 @@ func _input(event: InputEvent) -> void:
 		pause_menu.trigger_pause()
 
 func spawn_microgame() -> void:
-	var microgame: Microgame
 	if not unplayed_microgames.is_empty():
 		print("NO LEVEL UP NEEDED, PICKING GAME")
 		var microgame_scene = unplayed_microgames.pick_random()
 		unplayed_microgames.erase(microgame_scene)
 		print("DONE, INSTANCING GAME")
-		microgame = microgame_scene.instantiate()
+		current_microgame = microgame_scene.instantiate()
 	else:
 		print("LEVEL UP NEEDED, WAITING FOR LEVEL UP")
 		await level_up()
@@ -104,20 +103,18 @@ func spawn_microgame() -> void:
 		var microgame_scene = unplayed_microgames.pick_random()
 		unplayed_microgames.erase(microgame_scene)
 		print("DONE, INSTANCING GAME")
-		microgame = microgame_scene.instantiate()
+		current_microgame = microgame_scene.instantiate()
 	print("DONE, CONNECTING SIGNALS")
-	microgame.win_game.connect(win_microgame)
-	microgame.lose_game.connect(lose_microgame)
+	current_microgame.win_game.connect(win_microgame)
+	current_microgame.lose_game.connect(lose_microgame)
 	print("DONE, TELLING MICROGAME LEVEL")
-	microgame.level = level
-	print("DONE, SETTING MICROGAME AS CURRENT MICROGAME")
-	current_microgame = microgame
+	current_microgame.level = level
 	print("DONE, ADDING MICROGAME AS CHILD")
-	microgame_spawner.add_child(microgame)
+	microgame_spawner.add_child(current_microgame)
 	print("DONE, CHECKING TO SEE IF READY")
-	if not microgame.is_node_ready():
+	if not current_microgame.is_node_ready():
 		print("HAVE TO WAIT FOR READY")
-		await microgame.ready
+		await current_microgame.ready
 	print("DONE DONE MICROGAME SPAWNING")
 
 func spawn_add_time_popup(text: String) -> void:
