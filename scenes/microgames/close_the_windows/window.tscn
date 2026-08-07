@@ -50,8 +50,6 @@ font_size = 20
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_right = 500.0
-offset_bottom = 500.0
 script = ExtResource("2_l5npx")
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=2058971283]

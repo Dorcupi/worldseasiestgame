@@ -157,7 +157,8 @@ func start_microgame() -> void:
 		door_open_player.play()
 		main_animation_player.play("break_apart")
 		print("FINISHED, WAITING FOR DOOR TO OPEN")
-		await main_animation_player.animation_finished
+		while main_animation_player.is_playing():
+			await get_tree().process_frame
 		print("FINISHED, SETTING GAME PLAYING TO TRUE")
 		current_microgame.game_playing = true
 		print("DONE FINISHED DONE")

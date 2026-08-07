@@ -21,12 +21,12 @@ func _ready() -> void:
 	if str(time_dict.minute).length() <= 1: time_label.text += "0"
 	time_label.text += str(time_dict.minute)
 	print("UPDATED TIME, SPAWNING WINDOWS")
-	spawn_windows()
+	call_deferred("spawn_windows")
 
 func spawn_windows() -> void:
 	for i in range(randi_range(level, level + 2)):
 		print("WINDOW NUMBER %.0f" % i)
-		var b: Control = window_scene.instantiate()
+		var b: Control = window_scene.instantiate() # CRASHES RUNNING THIS LINE
 		print("INSTANTIATED")
 		b.visible = false
 		print("MADE INVISIBLE")
@@ -36,7 +36,7 @@ func spawn_windows() -> void:
 		print("APPENDED")
 	print("ALL DONE, CHANGING VARIABLE AND MAKING WINDOWS APPEAR")
 	windows_spawned = true
-	make_windows_appear()
+	call_deferred("make_windows_appear")
 
 func make_windows_appear() -> void:
 	made_windows_appear = true
@@ -56,15 +56,11 @@ func make_windows_appear() -> void:
 		print("MADE VISIBLE")
 		i.current_state = true
 		print("SET CURRENT STATE TO TRUE")
-		add_child(i)
+		call_deferred("add_child", i)
 		print("ADDED CHILD")
-		if not i.is_node_ready():
-			print("HAVE TO WAIT FOR READY")
-			await i.ready
 		windows_made_appear[current_window] = true
 		current_window += 1
 		print("UPDATED ARRAY AND ADDED ONE TO CURRENT WINDOW")
-		# await get_tree().physics_frame
 	print("DONE, ADDING FAIL BUTTON SIGNALS")
 	for i in get_tree().get_nodes_in_group("fail_button"):
 		i.pressed.connect(pressed_lose_button)
@@ -87,7 +83,8 @@ func pressed_lose_button() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if game_playing and not made_windows_appear and windows_spawned:
-		print("HAVEN'T MADE WINDOWS APPEAR, MAKING WINDOWS APPEAR")
-		made_windows_appear = true
-		make_windows_appear()
+	#if game_playing and not made_windows_appear and windows_spawned:
+		#print("HAVEN'T MADE WINDOWS APPEAR, MAKING WINDOWS APPEAR")
+		#made_windows_appear = true
+		#make_windows_appear()
+	pass

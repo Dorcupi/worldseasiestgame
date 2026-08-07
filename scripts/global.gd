@@ -20,6 +20,26 @@ const LEVEL_PRESETS: Dictionary[MUSIC_LEVEL, Array] = {
 	MUSIC_LEVEL.LEVEL_6: [0.0, 0.0, 0.0, 0.0, 0.0, 3.0],
 }
 
+const MOUSE_ICONS: Dictionary[Input.CursorShape, Texture] = {
+	Input.CursorShape.CURSOR_ARROW: preload("res://assets/cursor/cursor_none.svg"),
+	Input.CursorShape.CURSOR_IBEAM: preload("res://assets/cursor/bracket_b_vertical.svg"),
+	Input.CursorShape.CURSOR_POINTING_HAND: preload("res://assets/cursor/hand_small_point.svg"),
+	Input.CursorShape.CURSOR_CROSS: preload("res://assets/cursor/line_cross.svg"),
+	Input.CursorShape.CURSOR_WAIT: preload("res://assets/cursor/busy_hourglass_outline_detail.svg"),
+	Input.CursorShape.CURSOR_BUSY: preload("res://assets/cursor/cursor_busy.svg"),
+	Input.CursorShape.CURSOR_DRAG: preload("res://assets/cursor/hand_closed.svg"),
+	# insert cursor can drop here
+	Input.CursorShape.CURSOR_FORBIDDEN: preload("res://assets/cursor/cursor_disabled.svg"),
+	Input.CursorShape.CURSOR_VSIZE: preload("res://assets/cursor/resize_a_vertical.svg"),
+	Input.CursorShape.CURSOR_HSIZE: preload("res://assets/cursor/resize_a_horizontal.svg"),
+	Input.CursorShape.CURSOR_BDIAGSIZE: preload("res://assets/cursor/resize_a_diagonal.svg"),
+	Input.CursorShape.CURSOR_FDIAGSIZE: preload("res://assets/cursor/resize_a_diagonal_mirror.svg"),
+	Input.CursorShape.CURSOR_MOVE: preload("res://assets/cursor/resize_a_cross.svg"),
+	Input.CursorShape.CURSOR_VSPLIT: preload("res://assets/cursor/resize_b_vertical.svg"),
+	Input.CursorShape.CURSOR_HSPLIT: preload("res://assets/cursor/resize_b_horizontal.svg"),
+	Input.CursorShape.CURSOR_HELP: preload("res://assets/cursor/cursor_help.svg")
+}
+
 var music_player: AudioStreamPlayer
 @onready var music_resource: AudioStreamSynchronized = preload("res://resources/music.tres")
 
@@ -54,6 +74,7 @@ var music_level: MUSIC_LEVEL = MUSIC_LEVEL.OFF:
 
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
+	update_cursor()
 	load_game()
 	music_player = AudioStreamPlayer.new()
 	music_player.stream = music_resource
@@ -62,6 +83,10 @@ func _ready() -> void:
 	music_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(music_player)
 	# music_player.play()
+
+func update_cursor() -> void:
+	for i in MOUSE_ICONS.keys():
+		Input.set_custom_mouse_cursor(MOUSE_ICONS[i], i)
 
 func load_game() -> void:
 	load_settings()

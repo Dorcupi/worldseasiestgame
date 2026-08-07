@@ -21,22 +21,28 @@ var current_mouse: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("RUNNING SPAWN FUNCTION")
-	spawn()
+	call_deferred("spawn")
 	print("DONE RUNNING SPAWN FUNCTION, ADDING SIGNALS")
 	title_bar.mouse_entered.connect(titlebar_mouse.bind(true))
 	title_bar.mouse_exited.connect(titlebar_mouse.bind(false))
 	title_bar.gui_input.connect(titlebar_input)
 	print("DONE ADDING SIGNALS, DONE DONE")
 
-func spawn() -> void: # might be where the crashes are coming from
+func spawn() -> void: # where some crashes are coming from hypothethically
 	print("UPDATING X SIZE")
-	size.x = randi_range(300, 700)
+	custom_minimum_size.x = randi_range(300, 700)
+	#size.x = custom_minimum_size.x
 	print("DONE, UPDATING Y SIZE")
-	size.y = randi_range(300, 700)
+	custom_minimum_size.y = randi_range(300, 700)
+	#size.y = custom_minimum_size.y
+	print("DONE, WAITING FOR PROCESSING")
+	await get_tree().process_frame
 	print("DONE, UPDATING X POSITION")
-	global_position.x = randf_range(0 - int(size.x / 2), get_viewport_rect().size.x - int(size.x / 2))
+	global_position.x = randf_range(0 - int(custom_minimum_size.x / 2), get_viewport_rect().size.x - int(custom_minimum_size.x / 2))
 	print("DONE, UPDATING Y POSITION")
 	global_position.y = randf_range(63, get_viewport_rect().size.y - 83)
+	print("DONE, WAITING FOR PROCESSING")
+	await get_tree().process_frame
 	print("DONE, CHOOSING INNER CONTENT, FIRST REMOVING CHILDS")
 	var content: Array = []
 	print("MADE ARRAY FOR CONTENT")
@@ -45,6 +51,8 @@ func spawn() -> void: # might be where the crashes are coming from
 		print("APPENDED CONTENT WITH A CONTENT, REMOVING CHILD")
 		window_content.remove_child(i)
 		print("REMOVED CHILD")
+	print("DONE, WAITING FOR PROCESSING")
+	await get_tree().process_frame
 	print("DONE, PICKING RANDOM CONTENT")
 	var b = content.pick_random()
 	print("DONE, MAKING CONTENT VISIBLE")
