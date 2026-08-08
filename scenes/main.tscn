@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://c0be1f6q6ieoa" path="res://scenes/microgames/collect_the_coins.tscn" id="7_kmb1v"]
 [ext_resource type="PackedScene" uid="uid://brqi8mvi4jwq" path="res://scenes/microgames/replay_the_pattern.tscn" id="8_fuf3a"]
 [ext_resource type="PackedScene" uid="uid://636ybg82jgqt" path="res://scenes/microgames/dodge_the_pipes.tscn" id="9_pibwh"]
-[ext_resource type="PackedScene" uid="uid://hyxnrsvpcftw" path="res://scenes/microgames/close_the_windows.tscn" id="10_fv21b"]
 [ext_resource type="PackedScene" uid="uid://b2ohk2c13ii0f" path="res://scenes/microgames/spell_the_country.tscn" id="11_c6pm6"]
 [ext_resource type="PackedScene" uid="uid://bt662f4ohsdv4" path="res://scenes/microgames/do_a_pushup.tscn" id="12_5he1u"]
 [ext_resource type="Shader" uid="uid://b72u0bllgx3x2" path="res://shaders/transition.gdshader" id="15_jkv2x"]
@@ -550,7 +549,7 @@ lose_piano_player = NodePath("SoundEffects/LosePianoPlayer")
 clock_tick_player = NodePath("SoundEffects/ClockTickPlayer")
 heart_beat_player = NodePath("SoundEffects/HeartBeatPlayer")
 add_time_popup = ExtResource("2_yq6so")
-microgames = Array[PackedScene]([ExtResource("3_qkpxi"), ExtResource("4_5q0nq"), ExtResource("5_dgi5k"), ExtResource("6_j8jky"), ExtResource("7_kmb1v"), ExtResource("8_fuf3a"), ExtResource("9_pibwh"), ExtResource("10_fv21b"), ExtResource("11_c6pm6"), ExtResource("12_5he1u")])
+microgames = Array[PackedScene]([ExtResource("3_qkpxi"), ExtResource("4_5q0nq"), ExtResource("5_dgi5k"), ExtResource("6_j8jky"), ExtResource("7_kmb1v"), ExtResource("8_fuf3a"), ExtResource("9_pibwh"), ExtResource("11_c6pm6"), ExtResource("12_5he1u")])
 starting_time = 30.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1227043791]
