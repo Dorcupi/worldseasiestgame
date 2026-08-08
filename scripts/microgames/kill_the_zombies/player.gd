@@ -11,7 +11,7 @@ var can_move: bool = false
 func _physics_process(delta: float) -> void:
 
 	if not GlobalResources.using_controller: look_at(get_global_mouse_position())
-	else: look_at(zombies_cursor.get_node("Sprite").get_local_ish_position())
+	else: look_at(global_position + zombies_cursor.get_node("Sprite").get_local_ish_position())
 	
 	if can_move:
 		var x_axis_direction := Input.get_axis("move_left", "move_right")
