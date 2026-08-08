@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c8dhur41cbb8s" path="res://assets/ui/Yellow/Double/button_rectangle_depth_gradient.png" id="5_1g033"]
 [ext_resource type="Texture2D" uid="uid://drlop0hbsreos" path="res://assets/ui/Yellow/Double/button_rectangle_gradient.png" id="6_01roj"]
 [ext_resource type="Texture2D" uid="uid://dxufg508yo6xm" path="res://assets/ui/Yellow/Double/button_rectangle_flat.png" id="7_wqwn7"]
+[ext_resource type="Texture2D" uid="uid://boke7jdnkifxm" path="res://assets/ui/highlight_rectangle_double.png" id="8_am25x"]
 [ext_resource type="Shader" uid="uid://b72u0bllgx3x2" path="res://shaders/transition.gdshader" id="8_oe2nd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bqqt6"]
@@ -166,6 +167,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("5_1g033")
 texture_pressed = ExtResource("6_01roj")
 texture_disabled = ExtResource("7_wqwn7")
+texture_focused = ExtResource("8_am25x")
 ignore_texture_size = true
 stretch_mode = 5
 

@@ -59,6 +59,7 @@ func _ready() -> void:
 	GlobalResources.music_transition_time = 1
 	GlobalResources.switched_from_keyboard.connect(on_controller_active)
 	microgame_button.button.pressed.connect(start_microgame)
+	current_state = GAME_STATE.MAIN_SCENE
 	trans_animation_player.play_backwards("fade_out")
 
 func on_controller_active() -> void:

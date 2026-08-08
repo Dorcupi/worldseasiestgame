@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://u53o5gx1i5ho" path="res://assets/ui/Yellow/Double/button_square_depth_gloss.png" id="3_0g0hd"]
 [ext_resource type="Texture2D" uid="uid://c1q1xv72lcybk" path="res://assets/ui/Yellow/Double/button_square_gloss.png" id="4_7pme1"]
 [ext_resource type="Texture2D" uid="uid://durca8rxeeyqu" path="res://assets/ui/Yellow/Double/button_square_flat.png" id="5_l2tpn"]
+[ext_resource type="Texture2D" uid="uid://bghmu1581hlxf" path="res://assets/ui/highlight_double.png" id="7_l2tpn"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7o4j0"]
 noise_type = 0
@@ -102,9 +103,14 @@ alignment = 1
 
 [node name="Option1" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer" unique_id=1848124267]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Option4")
+focus_neighbor_right = NodePath("../Option2")
+focus_next = NodePath("../Option2")
+focus_previous = NodePath("../Option4")
 texture_normal = ExtResource("3_0g0hd")
 texture_pressed = ExtResource("4_7pme1")
 texture_disabled = ExtResource("5_l2tpn")
+texture_focused = ExtResource("7_l2tpn")
 
 [node name="Label" type="Label" parent="CanvasLayer/CenterContainer/HBoxContainer/Option1" unique_id=549655067]
 layout_mode = 1
@@ -120,9 +126,14 @@ vertical_alignment = 1
 
 [node name="Option2" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer" unique_id=2134230560]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Option1")
+focus_neighbor_right = NodePath("../Option3")
+focus_next = NodePath("../Option3")
+focus_previous = NodePath("../Option1")
 texture_normal = ExtResource("3_0g0hd")
 texture_pressed = ExtResource("4_7pme1")
 texture_disabled = ExtResource("5_l2tpn")
+texture_focused = ExtResource("7_l2tpn")
 
 [node name="Label" type="Label" parent="CanvasLayer/CenterContainer/HBoxContainer/Option2" unique_id=387081791]
 layout_mode = 1
@@ -138,9 +149,14 @@ vertical_alignment = 1
 
 [node name="Option3" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer" unique_id=1766497006]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Option2")
+focus_neighbor_right = NodePath("../Option4")
+focus_next = NodePath("../Option4")
+focus_previous = NodePath(".")
 texture_normal = ExtResource("3_0g0hd")
 texture_pressed = ExtResource("4_7pme1")
 texture_disabled = ExtResource("5_l2tpn")
+texture_focused = ExtResource("7_l2tpn")
 
 [node name="Label" type="Label" parent="CanvasLayer/CenterContainer/HBoxContainer/Option3" unique_id=448427821]
 layout_mode = 1
@@ -156,9 +172,14 @@ vertical_alignment = 1
 
 [node name="Option4" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer" unique_id=835819034]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Option3")
+focus_neighbor_right = NodePath("../Option1")
+focus_next = NodePath("../Option1")
+focus_previous = NodePath("../Option3")
 texture_normal = ExtResource("3_0g0hd")
 texture_pressed = ExtResource("4_7pme1")
 texture_disabled = ExtResource("5_l2tpn")
+texture_focused = ExtResource("7_l2tpn")
 
 [node name="Label" type="Label" parent="CanvasLayer/CenterContainer/HBoxContainer/Option4" unique_id=346917623]
 layout_mode = 1

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cdkf6d72gsn0p" path="res://assets/ui/Green/Double/button_round_depth_gradient.png" id="3_eo131"]
 [ext_resource type="Texture2D" uid="uid://c2s16he6sri8t" path="res://assets/ui/Green/Double/button_round_gradient.png" id="4_vb5fu"]
 [ext_resource type="Texture2D" uid="uid://c0yvyhei755t5" path="res://assets/ui/Green/Double/button_round_flat.png" id="5_081w1"]
+[ext_resource type="Texture2D" uid="uid://b05bwv3xpo1hx" path="res://assets/ui/highlight_round_double.png" id="7_081w1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_clhjk"]
 font = ExtResource("2_081w1")
@@ -82,24 +83,44 @@ alignment = 1
 
 [node name="Button1" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer2" unique_id=1196796710]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Button4")
+focus_neighbor_right = NodePath("../Button2")
+focus_next = NodePath("../Button2")
+focus_previous = NodePath("../Button4")
 texture_normal = ExtResource("3_eo131")
 texture_pressed = ExtResource("4_vb5fu")
 texture_disabled = ExtResource("5_081w1")
+texture_focused = ExtResource("7_081w1")
 
 [node name="Button2" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer2" unique_id=1027210024]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Button1")
+focus_neighbor_right = NodePath("../Button3")
+focus_next = NodePath("../Button3")
+focus_previous = NodePath("../Button1")
 texture_normal = ExtResource("3_eo131")
 texture_pressed = ExtResource("4_vb5fu")
 texture_disabled = ExtResource("5_081w1")
+texture_focused = ExtResource("7_081w1")
 
 [node name="Button3" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer2" unique_id=1468182248]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Button2")
+focus_neighbor_right = NodePath("../Button4")
+focus_next = NodePath("../Button4")
+focus_previous = NodePath("../Button2")
 texture_normal = ExtResource("3_eo131")
 texture_pressed = ExtResource("4_vb5fu")
 texture_disabled = ExtResource("5_081w1")
+texture_focused = ExtResource("7_081w1")
 
 [node name="Button4" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer2" unique_id=1780325536]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Button3")
+focus_neighbor_right = NodePath("../Button1")
+focus_next = NodePath("../Button1")
+focus_previous = NodePath("../Button3")
 texture_normal = ExtResource("3_eo131")
 texture_pressed = ExtResource("4_vb5fu")
 texture_disabled = ExtResource("5_081w1")
+texture_focused = ExtResource("7_081w1")

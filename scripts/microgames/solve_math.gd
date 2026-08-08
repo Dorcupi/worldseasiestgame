@@ -6,8 +6,19 @@ extends Microgame
 var question: Array[int]
 var correct_button: TextureButton
 
+var prepared_for_controller: bool = false
+
 func _ready() -> void:
 	generate_buttons(generate_question())
+	GlobalResources.switched_from_keyboard.connect(on_controller)
+	if GlobalResources.using_controller:
+		prepared_for_controller = true
+		option_buttons[0].call_deferred("grab_focus")
+
+func on_controller() -> void:
+	if not prepared_for_controller:
+		prepared_for_controller = true
+		option_buttons[0].call_deferred("grab_focus")
 
 func generate_question() -> Array[int]:
 	var first_number: int = randi_range(1, 9)

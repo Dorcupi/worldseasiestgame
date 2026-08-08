@@ -21,6 +21,8 @@ var current_spot_in_pattern: int = -1
 
 var tween: Tween
 
+var prepared_for_controller: bool = false
+
 func _ready() -> void:
 	pattern = generate_pattern()
 	for i in buttons:
@@ -37,7 +39,9 @@ func _process(delta: float) -> void:
 				current_spot_in_pattern = 0
 				play_pattern(current_spot_in_pattern)
 		STAGE.REPLAYING:
-			pass
+			if not prepared_for_controller and GlobalResources.using_controller:
+				prepared_for_controller = true
+				buttons[0].call_deferred("grab_focus")
 
 func play_pattern(_position: int) -> void:
 	if current_stage == STAGE.WATCHING:
@@ -56,6 +60,9 @@ func move_in_pattern() -> void:
 		for i in buttons:
 			i.disabled = false
 		label.text = "Replay the Pattern"
+		if GlobalResources.using_controller:
+			prepared_for_controller = true
+			buttons[0].call_deferred("grab_focus")
 	else:
 		current_spot_in_pattern += 1
 		play_pattern(current_spot_in_pattern)

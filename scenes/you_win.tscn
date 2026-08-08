@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bf3vll2nksry7" path="res://assets/fonts/Gorditas-Bold.ttf" id="5_sdx3b"]
 [ext_resource type="Texture2D" uid="uid://dxufg508yo6xm" path="res://assets/ui/Yellow/Double/button_rectangle_flat.png" id="6_sdx3b"]
 [ext_resource type="Shader" uid="uid://b72u0bllgx3x2" path="res://shaders/transition.gdshader" id="7_rfojx"]
+[ext_resource type="Texture2D" uid="uid://boke7jdnkifxm" path="res://assets/ui/highlight_rectangle_double.png" id="7_sdx3b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cj0xg"]
 shader = ExtResource("1_nw31f")
@@ -153,9 +154,14 @@ custom_minimum_size = Vector2(307.2, 102.4)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../BackToMenuButton")
+focus_neighbor_bottom = NodePath("../BackToMenuButton")
+focus_next = NodePath("../BackToMenuButton")
+focus_previous = NodePath("../BackToMenuButton")
 texture_normal = ExtResource("4_077re")
 texture_pressed = ExtResource("5_rfojx")
 texture_disabled = ExtResource("6_sdx3b")
+texture_focused = ExtResource("7_sdx3b")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -177,9 +183,14 @@ custom_minimum_size = Vector2(307.2, 102.4)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../PlayAgainButton")
+focus_neighbor_bottom = NodePath("../PlayAgainButton")
+focus_next = NodePath("../PlayAgainButton")
+focus_previous = NodePath("../PlayAgainButton")
 texture_normal = ExtResource("4_077re")
 texture_pressed = ExtResource("5_rfojx")
 texture_disabled = ExtResource("6_sdx3b")
+texture_focused = ExtResource("7_sdx3b")
 ignore_texture_size = true
 stretch_mode = 5
 

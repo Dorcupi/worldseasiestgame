@@ -3,10 +3,13 @@ extends Node2D
 @onready var animation_player: AnimationPlayer = $CanvasLayer2/AnimationPlayer
 @onready var main_game: PackedScene = preload("res://scenes/main.tscn")
 @onready var main_menu: PackedScene = preload("res://scenes/main_menu.tscn")
+@onready var play_again_button: TextureButton = $CanvasLayer/Control/VBoxContainer/PlayAgainButton
 
 @export var time_spent_label: Label
 @export var microgames_won_label: Label
 @export var new_pb_label: Label
+
+var prepared_for_controller: bool = false
 
 func _ready() -> void:
 	new_pb_label.visible = GlobalResources.beat_pb
@@ -15,6 +18,15 @@ func _ready() -> void:
 	if GlobalResources.music_level != GlobalResources.MUSIC_LEVEL.LEVEL_5:
 			GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.LEVEL_5
 	animation_player.play_backwards("fade_out")
+	GlobalResources.switched_from_keyboard.connect(change_controller)
+	if GlobalResources.using_controller:
+		prepared_for_controller = true
+		play_again_button.call_deferred("grab_focus")
+
+func change_controller() -> void:
+	if not prepared_for_controller:
+		prepared_for_controller = true
+		play_again_button.call_deferred("grab_focus")
 
 func _on_play_again_button_pressed() -> void:
 	animation_player.play("fade_out")

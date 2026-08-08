@@ -3,11 +3,23 @@ extends Node2D
 @onready var main_game: PackedScene = load("res://scenes/main.tscn")
 @onready var settings: PackedScene = load("res://scenes/settings.tscn")
 @export var trans_animation_player: AnimationPlayer
+@onready var play_button: TextureButton = $CanvasLayer/MarginContainer/VBoxContainer/PlayButton
+
+var prepared_for_controller: bool = false
 
 func _ready() -> void:
 	trans_animation_player.play_backwards("fade_out")
 	if GlobalResources.music_level != GlobalResources.MUSIC_LEVEL.LEVEL_6:
 		GlobalResources.music_level = GlobalResources.MUSIC_LEVEL.LEVEL_6
+	GlobalResources.switched_from_keyboard.connect(change_controller)
+	if GlobalResources.using_controller:
+		prepared_for_controller = true
+		play_button.call_deferred("grab_focus")
+
+func change_controller() -> void:
+	if not prepared_for_controller:
+		prepared_for_controller = true
+		play_button.call_deferred("grab_focus")
 
 func _on_play_button_pressed() -> void:
 	trans_animation_player.play("fade_out")

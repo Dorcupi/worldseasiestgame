@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c8dhur41cbb8s" path="res://assets/ui/Yellow/Double/button_rectangle_depth_gradient.png" id="5_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://drlop0hbsreos" path="res://assets/ui/Yellow/Double/button_rectangle_gradient.png" id="6_jk1qb"]
 [ext_resource type="Texture2D" uid="uid://dxufg508yo6xm" path="res://assets/ui/Yellow/Double/button_rectangle_flat.png" id="7_5dd4i"]
+[ext_resource type="Texture2D" uid="uid://boke7jdnkifxm" path="res://assets/ui/highlight_rectangle_double.png" id="8_jk1qb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bqqt6"]
 shader = ExtResource("2_ekxnf")
@@ -157,9 +158,14 @@ custom_minimum_size = Vector2(307.2, 102.4)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+focus_previous = NodePath("../QuitButton")
 texture_normal = ExtResource("5_tbmy8")
 texture_pressed = ExtResource("6_jk1qb")
 texture_disabled = ExtResource("7_5dd4i")
+texture_focused = ExtResource("8_jk1qb")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -181,9 +187,14 @@ custom_minimum_size = Vector2(307.2, 102.4)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../PlayButton")
 texture_normal = ExtResource("5_tbmy8")
 texture_pressed = ExtResource("6_jk1qb")
 texture_disabled = ExtResource("7_5dd4i")
+texture_focused = ExtResource("8_jk1qb")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -205,9 +216,14 @@ custom_minimum_size = Vector2(307.2, 102.4)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../PlayButton")
+focus_next = NodePath("../PlayButton")
+focus_previous = NodePath("../SettingsButton")
 texture_normal = ExtResource("5_tbmy8")
 texture_pressed = ExtResource("6_jk1qb")
 texture_disabled = ExtResource("7_5dd4i")
+texture_focused = ExtResource("8_jk1qb")
 ignore_texture_size = true
 stretch_mode = 5
 
