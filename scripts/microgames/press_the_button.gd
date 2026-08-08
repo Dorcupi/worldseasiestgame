@@ -4,6 +4,7 @@ extends Microgame
 @export var timer: Timer
 @export var clicks_left_label: Label
 @export var audio_stream_player: AudioStreamPlayer
+@export var button: TextureButton
 
 
 var number_of_clicks_needed: float
@@ -12,6 +13,7 @@ var clicks: float
 func _ready() -> void:
 	number_of_clicks_needed = clamp(randi_range(level, level + 4), 1, 15)
 	clicks = number_of_clicks_needed
+	button.call_deferred("grab_focus")
 
 func _process(delta: float) -> void:
 	if game_playing:

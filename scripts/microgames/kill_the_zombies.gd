@@ -8,6 +8,7 @@ extends Microgame
 @export var enemy: PackedScene
 @export var enemy_spawner: Node2D
 @export var player_hit_player: AudioStreamPlayer
+@export var zombies_cursor: CanvasLayer
 
 var lives_left: int = 3
 
@@ -26,6 +27,7 @@ func _process(delta: float) -> void:
 		if get_tree().get_node_count_in_group("enemies") <= 0:
 			player.can_move = false
 			win_game.emit()
+		zombies_cursor.visible = GlobalResources.using_controller
 
 func hurt_player() -> void:
 	if game_playing:

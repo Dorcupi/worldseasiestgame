@@ -3,6 +3,7 @@ class_name MainGame
 
 enum GAME_STATE {
 	MAIN_SCENE,
+	MOVING_TO,
 	MINIGAME,
 	MOVING_BACK,
 	GAME_OVER,
@@ -44,7 +45,11 @@ enum GAME_STATE {
 @onready var once_second_time: int = int(time_left)
 var time_spent: float = 0
 var microgames_won: int = 0
-var current_state: GAME_STATE = GAME_STATE.MAIN_SCENE
+var current_state: GAME_STATE = GAME_STATE.MAIN_SCENE:
+	set(value):
+		current_state = value
+		on_state_switch(value)
+		
 var current_microgame: Microgame
 var add_amount: Array[float] = start_add_amount
 var level: int = 1
@@ -52,8 +57,18 @@ var level: int = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GlobalResources.music_transition_time = 1
+	GlobalResources.switched_from_keyboard.connect(on_controller_active)
 	microgame_button.button.pressed.connect(start_microgame)
 	trans_animation_player.play_backwards("fade_out")
+
+func on_controller_active() -> void:
+	if current_state == GAME_STATE.MAIN_SCENE:
+		microgame_button.button.call_deferred("grab_focus")
+
+func on_state_switch(state: GAME_STATE) -> void:
+	match state:
+		GAME_STATE.MAIN_SCENE:
+			microgame_button.button.call_deferred("grab_focus")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -141,7 +156,7 @@ func despawn_microgame() -> void:
 
 func start_microgame() -> void:
 	if current_state == GAME_STATE.MAIN_SCENE:
-		current_state = GAME_STATE.MINIGAME
+		current_state = GAME_STATE.MOVING_TO
 		print("SPAWNING MICROGAME")
 		await spawn_microgame()
 		print("FINISHED, ADJUSTING MUSIC")
@@ -159,6 +174,7 @@ func start_microgame() -> void:
 		print("FINISHED, SETTING GAME PLAYING TO TRUE")
 		current_microgame.game_playing = true
 		print("DONE FINISHED DONE")
+		current_state = GAME_STATE.MINIGAME
 
 func win_microgame() -> void:
 	if current_state == GAME_STATE.MINIGAME:

@@ -6,23 +6,21 @@ extends CharacterBody2D
 var can_move: bool = false
 @export var shoot_player: AudioStreamPlayer
 @export var enemy_hit_player: AudioStreamPlayer
+@export var zombies_cursor: CanvasLayer
 
 func _physics_process(delta: float) -> void:
 
-	look_at(get_global_mouse_position())
+	if not GlobalResources.using_controller: look_at(get_global_mouse_position())
+	else: look_at(zombies_cursor.get_node("Sprite").get_local_ish_position())
 	
 	if can_move:
 		var x_axis_direction := Input.get_axis("move_left", "move_right")
 		var y_axis_direction := Input.get_axis("move_up", "move_down")
-		if x_axis_direction:
-			velocity.x = x_axis_direction * speed
+		var direction: Vector2 = Vector2(x_axis_direction, y_axis_direction).normalized()
+		if direction:
+			velocity = direction * speed
 		else:
-			velocity.x = move_toward(velocity.x, 0, speed)
-		if y_axis_direction:
-			velocity.y = y_axis_direction * speed
-		else:
-			velocity.y = move_toward(velocity.y, 0, speed)
-		
+			velocity = velocity.move_toward(Vector2.ZERO, speed)
 		if Input.is_action_just_pressed("attack"):
 			shoot()
 

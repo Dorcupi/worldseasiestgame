@@ -37,12 +37,13 @@ shader_parameter/flicker_intensity = 0.0
 shader_parameter/color_offset = 1.5
 shader_parameter/blur = 0.15
 
-[node name="PressTheButton" type="Node2D" unique_id=1731686494 node_paths=PackedStringArray("time_left_label", "timer", "clicks_left_label", "audio_stream_player")]
+[node name="PressTheButton" type="Node2D" unique_id=1731686494 node_paths=PackedStringArray("time_left_label", "timer", "clicks_left_label", "audio_stream_player", "button")]
 script = ExtResource("1_q38cy")
 time_left_label = NodePath("CanvasLayer/Button/TimeLeftLabel")
 timer = NodePath("Timer")
 clicks_left_label = NodePath("CanvasLayer/Button/Button/Label")
 audio_stream_player = NodePath("AudioStreamPlayer")
+button = NodePath("CanvasLayer/Button/Button")
 game_name = "Press the Button"
 metadata/_custom_type_script = "uid://cfnntxqkpwn3k"
 

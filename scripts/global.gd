@@ -40,11 +40,15 @@ const MOUSE_ICONS: Dictionary[Input.CursorShape, Texture] = {
 	Input.CursorShape.CURSOR_HELP: preload("res://assets/cursor/cursor_help.svg")
 }
 
+signal switched_to_keyboard
+signal switched_from_keyboard
+
 var music_player: AudioStreamPlayer
 @onready var music_resource: AudioStreamSynchronized = preload("res://resources/music.tres")
 
 var past_splash: bool = false
 var entered_settings: bool = false
+var using_controller: bool = false
 
 var highest_time: float
 var highest_microgames_won: int
@@ -83,6 +87,22 @@ func _ready() -> void:
 	music_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(music_player)
 	# music_player.play()
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey or event is InputEventMouseButton or event is InputEventMouseMotion:
+		if using_controller:
+			print("KEYBOARD ACTIVE")
+			using_controller = false
+			switched_to_keyboard.emit()
+	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		if event is InputEventJoypadMotion and abs(event.axis_value) > 0.2:
+			pass
+		elif event is InputEventJoypadMotion:
+			return
+		if !using_controller:
+			print("CONTROLLER ACTIVE")
+			using_controller = true
+			switched_from_keyboard.emit()
 
 func update_cursor() -> void:
 	for i in MOUSE_ICONS.keys():

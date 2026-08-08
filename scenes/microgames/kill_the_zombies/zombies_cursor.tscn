@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dn2h3pwsu1pmq"]
+
+[ext_resource type="Texture2D" uid="uid://5ebpjbi02rsc" path="res://assets/cursor/target_round_a.svg" id="1_x0vsv"]
+[ext_resource type="Script" uid="uid://b030phtc8dg48" path="res://scripts/zombies_cursor.gd" id="2_eu8vw"]
+
+[node name="ZombiesCursor" type="CanvasLayer" unique_id=1424475272]
+layer = 5
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=572245688]
+z_index = 4096
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_x0vsv")
+script = ExtResource("2_eu8vw")

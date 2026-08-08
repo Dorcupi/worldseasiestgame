@@ -10,6 +10,7 @@ var left_zero: bool = false
 @onready var breath_in_player: AudioStreamPlayer = $BreathInPlayer
 @onready var breath_out_player: AudioStreamPlayer = $BreathOutPlayer
 @onready var animation_player: AnimationPlayer = $CanvasLayer/HBoxContainer/Control/AnimationPlayer
+@onready var button: TextureButton = $CanvasLayer/HBoxContainer/Control2/Button
 
 @export var empty_image: Texture
 @export var half_image: Texture
@@ -21,7 +22,7 @@ var breathed_out: bool = true
 func _ready() -> void:
 	button_worth = 15.0 / (float(level) / 2)
 	lose_worth = 1 * clamp(float(level), 0.0, 10.0)
-	print(lose_worth)
+	button.call_deferred("grab_focus")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

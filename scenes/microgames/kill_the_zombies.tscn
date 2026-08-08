@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://itv6fhsnh2yl" path="res://assets/microgames/kill_the_zombies/shoot.sfxr" id="8_p85eo"]
 [ext_resource type="AudioStream" uid="uid://62c8sis1pbkp" path="res://assets/microgames/kill_the_zombies/hit.sfxr" id="9_oodu7"]
 [ext_resource type="AudioStream" uid="uid://btlw4xl5rpgoh" path="res://assets/microgames/kill_the_zombies/player_hurt.sfxr" id="10_e5leb"]
+[ext_resource type="PackedScene" uid="uid://dn2h3pwsu1pmq" path="res://scenes/microgames/kill_the_zombies/zombies_cursor.tscn" id="11_oodu7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g4v7s"]
 shader = ExtResource("2_h1r14")
@@ -20,7 +21,7 @@ shader_parameter/magnitude = Vector2(0.01, 0.01)
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 26.305893
 
-[node name="KillTheZombies" type="Node2D" unique_id=711886512 node_paths=PackedStringArray("player", "screen_shake", "attacked_timer", "wall_tile_map", "accessories_tile_map", "enemy_spawner", "player_hit_player")]
+[node name="KillTheZombies" type="Node2D" unique_id=711886512 node_paths=PackedStringArray("player", "screen_shake", "attacked_timer", "wall_tile_map", "accessories_tile_map", "enemy_spawner", "player_hit_player", "zombies_cursor")]
 script = ExtResource("1_17s0b")
 player = NodePath("Player")
 screen_shake = NodePath("CanvasLayer/ScreenShake")
@@ -30,6 +31,7 @@ accessories_tile_map = NodePath("AccessoriesLayer")
 enemy = ExtResource("7_h1r14")
 enemy_spawner = NodePath("EnemySpawner")
 player_hit_player = NodePath("PlayerHitPlayer")
+zombies_cursor = NodePath("Player/Camera2D/ZombiesCursor")
 game_name = "Kill the Zombies"
 metadata/_custom_type_script = "uid://cfnntxqkpwn3k"
 
@@ -67,13 +69,14 @@ tile_set = ExtResource("2_gbnxd")
 tile_map_data = PackedByteArray("AAD8////AAAaAAsAADD9////AAAZAAsAADD+////AAAXAAsAADABAAEAAAAPABEAAAACAAEAAAAQABEAAAAAAAEAAAAOABEAAAAHAPr/AAASAAYAAAAHAPv/AAASAAcAAAAIAPr/AAATAAYAAAAIAPv/AAATAAcAAAAJAAAAAAASAAYAAAAJAAEAAAASAAcAAAAKAAAAAAATAAYAAAAKAAEAAAATAAcAAAD//wQAAAASAAYAAAD//wUAAAASAAcAAAAAAAQAAAATAAYAAAAAAAUAAAATAAcAAAD2/wAAAAASAAYAAAD2/wEAAAASAAcAAAD3/wAAAAATAAYAAAD3/wEAAAATAAcAAAD4//v/AAASAAYAAAD4//z/AAASAAcAAAD5//v/AAATAAYAAAD5//z/AAATAAcAAAD7//r/AAAUAAYAAAD3/wMAAAAUAAYAAAACAAUAAAAUAAYAAAAIAAIAAAAUAAYAAAAJAPz/AAAUAAYAAAAGAAQAAAAUAAcAAAD5/wUAAAAUAAcAAAD2//3/AAAUAAcAAAD7//j/AAAUAAcAAAAEAPn/AAAUAAcAAAACAPj/AAAUAAcAAAD8//v/AAAXAAcAAAD5/wEAAAAXAAcAAAD8/wUAAAAXAAcAAAAEAAQAAAAXAAcAAAAIAAAAAAAXAAcAAAABAAcAAAAUAAgAAAD8/wcAAAAVAAgAAAD5/wYAAAAWAAgAAAD3/wYAAAATAAkAAAD1/wQAAAASAAkAAAD0/wIAAAAVAAgAAAD1////AAATAAkAAADz//3/AAATAAkAAAD1//v/AAAUAAgAAAD2//j/AAAUAAgAAAD4//f/AAAWAAgAAAD6//X/AAAVAAgAAAD8//b/AAATAAkAAAAAAPX/AAAWAAgAAAACAPb/AAASAAkAAAAHAPb/AAAWAAgAAAAIAPj/AAATAAkAAAALAPn/AAASAAkAAAALAPv/AAAVAAgAAAAMAP7/AAAUAAgAAAANAAEAAAAWAAgAAAALAAQAAAAUAAkAAAAJAAcAAAATAAkAAAAGAAYAAAAUAAkAAAA=")
 tile_set = ExtResource("2_gbnxd")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1845482828 node_paths=PackedStringArray("bullet_spawn_position", "shoot_player", "enemy_hit_player")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1845482828 node_paths=PackedStringArray("bullet_spawn_position", "shoot_player", "enemy_hit_player", "zombies_cursor")]
 motion_mode = 1
 script = ExtResource("2_48o1c")
 bullet = ExtResource("6_8y5kn")
 bullet_spawn_position = NodePath("BulletSpawnPosition")
 shoot_player = NodePath("../ShootPlayer")
 enemy_hit_player = NodePath("../EnemyHitPlayer")
+zombies_cursor = NodePath("Camera2D/ZombiesCursor")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1910570326]
 texture = ExtResource("3_17s0b")
@@ -87,6 +90,9 @@ position = Vector2(34, 10)
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=924504520]
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
+
+[node name="ZombiesCursor" parent="Player/Camera2D" unique_id=572245688 instance=ExtResource("11_oodu7")]
+visible = false
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=1199321304]
 
