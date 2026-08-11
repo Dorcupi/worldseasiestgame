@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var main_game: PackedScene = load("res://scenes/main.tscn")
+@onready var intro: PackedScene = load("res://scenes/intro.tscn")
 @onready var settings: PackedScene = load("res://scenes/settings.tscn")
 @export var trans_animation_player: AnimationPlayer
 @onready var play_button: TextureButton = $CanvasLayer/MarginContainer/VBoxContainer/PlayButton
@@ -24,7 +25,10 @@ func change_controller() -> void:
 func _on_play_button_pressed() -> void:
 	trans_animation_player.play("fade_out")
 	await trans_animation_player.animation_finished
-	get_tree().change_scene_to_packed(main_game)
+	if GlobalResources.beat_game:
+		get_tree().change_scene_to_packed(main_game)
+	else:
+		get_tree().change_scene_to_packed(intro)
 
 
 func _on_quit_button_pressed() -> void:

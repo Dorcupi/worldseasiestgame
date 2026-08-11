@@ -35,7 +35,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgi4"]
 shader = ExtResource("1_tbgi4")
 shader_parameter/color_gap = Color(0.9764706, 0.9098039, 0.63529414, 1)
-shader_parameter/color_stripe = Color(0.96371835, 0.87453634, 0.5058518, 1)
+shader_parameter/color_stripe = Color(0.9647059, 0.8745098, 0.5058824, 1)
 shader_parameter/divisions = 12.0
 shader_parameter/stripe_bias = 2.0
 shader_parameter/speed = 0.1

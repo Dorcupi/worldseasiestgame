@@ -1,0 +1,21 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+&"_translation_id": "",
+&"color": Color(0.63529414, 0.8745098, 0.9764706, 1),
+&"custom_info": {
+"prefix": "",
+"sound_mood_default": "",
+"sound_moods": {},
+"style": "",
+"suffix": ""
+},
+&"default_portrait": "",
+&"description": "The narrator who stole the game.",
+&"display_name": "{strix.name}",
+&"mirror": false,
+&"nicknames": ["Strix"],
+&"offset": Vector2(0, 0),
+&"portraits": {},
+&"scale": 1.0
+}
