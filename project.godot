@@ -37,6 +37,7 @@ directories/dch_directory={
 "strix": "res://characters/strix.dch"
 }
 directories/dtl_directory={
+"game1": "res://timelines/game1.dtl",
 "intro": "res://timelines/intro.dtl"
 }
 layout/style_directory={}
@@ -67,7 +68,9 @@ choices/reveal_delay=0
 choices/reveal_by_input=false
 save/autosave_delay=60.0
 save/encryption_on_exports_only=true
-text/autopauses={}
+text/autopauses={
+"?!.,;:": 0.1
+}
 audio/channel_defaults={
 "": {
 "audio_bus": "",

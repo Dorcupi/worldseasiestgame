@@ -4,11 +4,11 @@ else:
 	set {strix.name} = {strix.unknown_name}
 strix: [font_size=15][i]At least this still works.[/i][/font_size]
 audio -
-strix: [font_size=15][i]Oh shoot.[n+] See, I wouldn't need this junk if I could still pr–[/i][/font_size]
-strix: [shake rate=25.0 level=10 connected=1]Oh,[/shake][n+] you can hear me!
+strix: [font_size=15][i]Oh shoot. [pause=0.2]See, I wouldn't need this junk if I could still pr–[/i][/font_size]
+strix: [shake rate=25.0 level=10 connected=1]Oh,[/shake] [pause=0.2]you can hear me!
 strix: [i]I mean– um...[/i]
 join strix center
-strix: [wave amp=50 freq=5.0 connected=1]Hello[/wave], and welcome to my game, [n+][b][wave amp=50 freq=5.0 connected=1]the world's easiest game![/wave][/b]
+strix: [wave amp=50 freq=5.0 connected=1]Hello[/wave], and welcome to my game, [pause=0.2][b][wave amp=50 freq=5.0 connected=1]the world's easiest game![/wave][/b]
 strix: You're going to have so much fun here!
 label Questions
 - Who are you? | [if {know_strix_name} == false] [else="hide"]
@@ -23,7 +23,7 @@ label Past Questions
 audio -
 strix: There we go!
 leave strix
-strix: Hello and welcome to the [wave amp=50 freq=5.0 connected=1]World's Easiest Game![/wave] [n+]You're going to have so much fun[pause=0.4], cause who doesn't enjoy super easy stuff??
+strix: Hello and welcome to the [wave amp=50 freq=5.0 connected=1]World's Easiest Game![/wave] [pause=0.2]You're going to have so much fun[pause=0.2], cause who doesn't enjoy super easy stuff??
 - Who?
 strix: [b][wave amp=50 freq=5.0 connected=1][rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0]NO ONE![/rainbow][/wave][/b]
 if {know_strix_name} == false:
@@ -31,19 +31,21 @@ if {know_strix_name} == false:
 	set {know_strix_name} = true
 	strix: I'm Strix and I've got you in for a [b][wave amp=50 freq=5.0 connected=1]doozy[/wave][/b] of excitement!
 strix: The game is very simple. There's a timer for ten seconds and all you have to do...[n+] is [b]just wait for it to finish![/b]
-strix: Yes, it's that simple![n+] There is [i]one[/i] catch tho...
+strix: Yes, it's that simple! [pause=0.2]There is [i]one[/i] catch tho...
 strix: I couldn't afford to make a new game so I had to steal[aa=0]
 strix: [speed=0]I couldn't afford to make a new game so I had to[speed] [i]borrow[/i] an unfinished one from someone else.
-strix: [b][i]BUT[/i][/b], I made it better and [n+][wave amp=50 freq=5.0 connected=1][i]easy.[/i][/wave]
+strix: [b][i]BUT[/i][/b], I made it better and [pause=0.4][wave amp=50 freq=5.0 connected=1][i]easy.[/i][/wave]
 strix: [b][i]HOWEVER[/i][/b], it came with this [b]stupid button[/b] I can't get rid of.
-strix: The [shake rate=25.0 level=10 connected=1][b]bad[/b][/shake] thing is that whenever you press the button,[speed=3][n+][shake rate=25.0 level=10 connected=1][b]very bad things[/b][/shake][speed] happen.
-strix: [speed=0][shake rate=25.0 level=10 connected=1][b]Very bad things![/b][/shake][speed][pause=0.4] You [b]don't[/b] want to find out!
-strix: So basically,[pause=0.4] don't press the button![n+] That's [b]all[/b] you have to do!
+strix: The [shake rate=25.0 level=10 connected=1][b]bad[/b][/shake] thing is that whenever you press the button,[speed=3][pause=0.2][shake rate=25.0 level=10 connected=1][b]very bad things[/b][/shake][speed] happen.
+strix: [speed=0][shake rate=25.0 level=10 connected=1][b]Very bad things![/b][/shake][speed] [pause=0.2]You [b]don't[/b] want to find out!
+strix: So basically, [pause=0.2]don't press the button![n+] That's [b]all[/b] you have to do!
 strix: Just wait for ten seconds and...
 audio -
 strix: [shake rate=25.0 level=10 connected=1][b]DON'T![n+] PRESS![n+] THE![n+] BUTTON![/b][/shake]
 audio -
 strix: [font_size=15][i]Damn it, I made the game start a–[/i][/font_size] I mean...
+join strix center
 strix: I mean I made the game start so you can finally enjoy!
 audio -
 strix: Have fun!
+leave --All--
