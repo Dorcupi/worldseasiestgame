@@ -2,13 +2,16 @@ if {know_strix_name} == true:
 	set {strix.name} = {strix.regular_name}
 else:
 	set {strix.name} = {strix.unknown_name}
+join strix center
 strix: [speed=5].....
 strix: You didn't understand! [pause=0.2][b]THAT[/b] must be the issue!
 strix: Right?... [pause=0.2]Of course it is! [pause=0.2]You wouldn't actually go [b][i]directly against[/i][/b] my orders!
 strix: I just need to try again with my explanation!
 audio -
 strix: [shake rate=25.0 level=10 connected=1][b]WAIT.[n+] HERE.[/b][/shake]
+leave strix
 audio -
+join strix center
 strix: [wave amp=50 freq=5.0 connected=1][b]Perfect![/b][/wave] [pause=0.2]Where was I... [pause=0.2]right! [pause=0.2]My better, new and improved explanation!
 strix: I know where I went wrong, [pause=0.2]I [wave amp=50 freq=5.0 connected=1]tricked you![/wave] [n+]I said the button did [b][shake rate=25.0 level=10 connected=1]bad things[/shake][/b], and the truth is...
 strix: [b][shake rate=25.0 level=10 connected=1]It's trying to trick you![/shake][/b]
@@ -23,4 +26,5 @@ strix: Because that's my main goal! [n+][font_size=15][i]Obviously.[/i][/font_si
 strix: Y'know what, [pause=0.2]just wait for me to unfreeze this and play again!
 strix: [font_size=15][i]And hopefully things will go better this time.[/i][/font_size][aa=0]
 strix: [speed=0.5]Ok, bye![speed]
+leave --All--
 audio -

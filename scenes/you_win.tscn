@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dxufg508yo6xm" path="res://assets/ui/Yellow/Double/button_rectangle_flat.png" id="6_sdx3b"]
 [ext_resource type="Shader" uid="uid://b72u0bllgx3x2" path="res://shaders/transition.gdshader" id="7_rfojx"]
 [ext_resource type="Texture2D" uid="uid://boke7jdnkifxm" path="res://assets/ui/highlight_rectangle_double.png" id="7_sdx3b"]
+[ext_resource type="Shader" uid="uid://5tx1m30m6a0h" path="res://shaders/glitch_grayscale.gdshader" id="8_cj0xg"]
+[ext_resource type="Script" uid="uid://c6srcijviy0vt" path="res://scripts/glitch_grayscale.gd" id="9_ktrfn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cj0xg"]
 shader = ExtResource("1_nw31f")
@@ -34,6 +36,16 @@ shadow_offset = Vector2(0, 6)
 [sub_resource type="LabelSettings" id="LabelSettings_lx35p"]
 font = ExtResource("5_sdx3b")
 font_size = 40
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57qmd"]
+shader = ExtResource("8_cj0xg")
+shader_parameter/pixel_size = 3.0
+shader_parameter/vhs_intensity = 8.00000038
+shader_parameter/glitch_opacity = 0.5
+shader_parameter/double_vision_split = 0.01
+shader_parameter/mono_color = Color(1, 1, 1, 1)
+shader_parameter/mono_intensity = 1.0
+shader_parameter/contrast = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sdx3b"]
 shader = ExtResource("7_rfojx")
@@ -87,7 +99,7 @@ microgames_won_label = NodePath("CanvasLayer/Control/VBoxContainer/MicrogamesWon
 new_pb_label = NodePath("CanvasLayer/Control/VBoxContainer/NewPBLabel")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=812679506]
-layer = 999
+layer = -1
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1840204026]
 layout_mode = 3
@@ -206,6 +218,17 @@ text = "Back to Menu"
 label_settings = SubResource("LabelSettings_lx35p")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GlitchGrayscale" type="ColorRect" parent="CanvasLayer" unique_id=830768725]
+material = SubResource("ShaderMaterial_57qmd")
+instance_shader_parameters/enable_glitch = false
+instance_shader_parameters/enable_monochrome = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_ktrfn")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1478171717]
 layer = 1000

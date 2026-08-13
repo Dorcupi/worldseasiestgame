@@ -10,6 +10,30 @@ enum MUSIC_LEVEL {
 	LEVEL_6
 }
 
+enum AFTER_CUTSCENE_ACTION {
+	CONTINUE,
+	SWITCH_SCENE,
+	QUIT
+}
+
+const CUTSCENES: Dictionary[String, DialogicTimeline] = {
+	"intro": preload("res://timelines/intro.dtl"),
+	"after_game_1": preload("res://timelines/game1.dtl")
+}
+
+const CUTSCENES_AFTER: Dictionary[String, AFTER_CUTSCENE_ACTION] = {
+	"intro": AFTER_CUTSCENE_ACTION.SWITCH_SCENE,
+	"after_game_1": AFTER_CUTSCENE_ACTION.CONTINUE
+}
+
+const CUTSCENE_SWITCH: Dictionary[String, PackedScene] = {
+	"intro": preload("res://scenes/main.tscn")
+}
+
+const AFTER_GAME_CUTSCENE: Dictionary[int, String] = {
+	1: "after_game_1"
+}
+
 const LEVEL_PRESETS: Dictionary[MUSIC_LEVEL, Array] = {
 	MUSIC_LEVEL.OFF: [-60.0, -60.0, -60.0, -60.0, -60.0, -60.0],
 	MUSIC_LEVEL.LEVEL_1: [0.0, -60.0, -60.0, -60.0, -60.0, -60.0],
@@ -59,6 +83,9 @@ var beat_game: bool = false
 var beat_pb: bool = false
 var times_played: int = 0
 
+var after_cutscene_ready: bool = false
+var after_cutscene: String
+
 var fixing_audio: bool = false
 var tween: Tween
 
@@ -75,7 +102,6 @@ var music_level: MUSIC_LEVEL = MUSIC_LEVEL.OFF:
 	set(value):
 		music_level = value
 		update_level(value)
-
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	update_cursor()
@@ -183,6 +209,11 @@ func update_time(value, value2) -> void:
 		beat_pb = true
 	else:
 		beat_pb = false
+	if AFTER_GAME_CUTSCENE.has(times_played):
+		after_cutscene_ready = true
+		after_cutscene = AFTER_GAME_CUTSCENE[times_played]
+	else:
+		after_cutscene_ready = false
 
 func update_level(level: MUSIC_LEVEL) -> void:
 	var created_tween: bool = false

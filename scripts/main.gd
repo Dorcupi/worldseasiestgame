@@ -37,7 +37,8 @@ enum GAME_STATE {
 
 ## Variables
 @export var add_time_popup: PackedScene
-@export var microgames: Array[PackedScene]
+@export var loaded_microgames: SceneArrayWrapper
+@onready var microgames: Array[PackedScene] = loaded_microgames.array
 @onready var unplayed_microgames: Array[PackedScene] = microgames.duplicate()
 @export var starting_time: float = 60.0
 @export var start_add_amount: Array[float] = [3, 5]
