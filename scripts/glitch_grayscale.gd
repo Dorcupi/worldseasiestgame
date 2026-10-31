@@ -22,6 +22,7 @@ var shader_monochrome_param: String = "enable_monochrome"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Dialogic.signal_event.connect(_on_dialogic_signal)
 	update()
 
 func update() -> void:
@@ -29,6 +30,9 @@ func update() -> void:
 	set_instance_shader_parameter(shader_glitch_param, glitch_enabled)
 	set_instance_shader_parameter(shader_monochrome_param, monochrome_enabled)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_dialogic_signal(argument: String) -> void:
+	if argument.contains(";"):
+		var array: Array = argument.split(";", false, 2)
+		var the_bool: bool = ("true" == array[-1].to_lower())
+		var the_setter: String = array[0]
+		self.set(the_setter, the_bool)

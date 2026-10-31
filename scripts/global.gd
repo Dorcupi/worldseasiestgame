@@ -64,6 +64,10 @@ const MOUSE_ICONS: Dictionary[Input.CursorShape, Texture] = {
 	Input.CursorShape.CURSOR_HELP: preload("res://assets/cursor/cursor_help.svg")
 }
 
+const SAVE_VERSIONS: Dictionary[int, Array] = {
+	0: ["0.1.0", "b1.0.0"]
+}
+
 signal switched_to_keyboard
 signal switched_from_keyboard
 
@@ -91,11 +95,21 @@ var tween: Tween
 
 var music_transition_time: float = 2
 
+var version: String
+var current_save_version: String
+
 var default_volume_levels: Dictionary = {
 	"Master": linear_to_db(1.0),
 	"Music": linear_to_db(1.0),
 	"Sound Effects": linear_to_db(1.0),
 	"Microgame Sound Effects": linear_to_db(1.0),
+}
+
+var default_progress: Dictionary = {
+	"highest_time": -1,
+	"highest_microgames_won": -1,
+	"beat_game": false,
+	"times_played": -1
 }
 
 var music_level: MUSIC_LEVEL = MUSIC_LEVEL.OFF:
@@ -105,6 +119,7 @@ var music_level: MUSIC_LEVEL = MUSIC_LEVEL.OFF:
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	update_cursor()
+	version = ProjectSettings.get_setting("application/config/version", "0.1.0")
 	load_game()
 	music_player = AudioStreamPlayer.new()
 	music_player.stream = music_resource
@@ -135,27 +150,77 @@ func update_cursor() -> void:
 		Input.set_custom_mouse_cursor(MOUSE_ICONS[i], i)
 
 func load_game() -> void:
+	load_version()
 	load_settings()
+	load_progress()
+	while not Dialogic.is_node_ready():
+		await get_tree().process_frame
+	Dialogic.Save.load()
+
+func load_version() -> void:
+	if not FileAccess.file_exists("user://version.save"):
+		print("No version file, defaulting to 0.1.0")
+		current_save_version = "0.1.0"
+	else:
+		var potential_version: String = FileAccess.get_file_as_string("user://version.save")
+		var error: Error = FileAccess.get_open_error()
+		if error != OK:
+			print("Fail to get version, defaulting to 0.1.0")
+			current_save_version = "0.1.0"
+		else:
+			current_save_version = potential_version.strip_edges()
+			print("Using save version %s" % current_save_version)
 
 func load_settings() -> void:
 	if not FileAccess.file_exists("user://settings.save"):
 		print("No settings file, loading default settings")
 		load_default_settings()
 	else:
-		var save_file = FileAccess.open("user://settings.save", FileAccess.READ)
-		var json_string: String = save_file.get_line()
-		var json: JSON = JSON.new()
-		var parse_result: Error = json.parse(json_string)
-		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-			print("Loading default settings as backup")
+		if SAVE_VERSIONS[0].has(current_save_version):
+			var save_file = FileAccess.open("user://settings.save", FileAccess.READ)
+			var json_string: String = save_file.get_line()
+			var json: JSON = JSON.new()
+			var parse_result: Error = json.parse(json_string)
+			if not parse_result == OK:
+				print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+				print("Loading default settings as backup")
+				load_default_settings()
+				return
+			var data: Dictionary = json.data
+			for i in data.keys():
+				if default_volume_levels.has(i):
+					print("Volume data, setting volume of bus")
+					set_volume(i, data[i])
+		else:
+			print("Don't have algorithm for current save version, loading default settings")
 			load_default_settings()
-			return
-		var data: Dictionary = json.data
-		for i in data.keys():
-			if default_volume_levels.has(i):
-				print("Volume data, setting volume of bus")
-				set_volume(i, data[i])
+
+func load_progress() -> void:
+	if not FileAccess.file_exists("user://progress.save"):
+		print("No progress file, done.")
+	else:
+		if SAVE_VERSIONS[0].has(current_save_version):
+			var save_file = FileAccess.open("user://progress.save", FileAccess.READ)
+			var json_string: String = save_file.get_line()
+			var json: JSON = JSON.new()
+			var parse_result: Error = json.parse(json_string)
+			if not parse_result == OK:
+				print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+				print("Using defaults as backup, done.")
+				return
+			var data: Dictionary = json.data
+			for i in data.keys():
+				if default_progress.has(i):
+					if data[i] is float or data[i] is int:
+						if data[i] > 0:
+							print("Usable progress, loading")
+							self.set(i, data[i])
+					else:
+						if data[i] != false:
+							print("Usable progress, loading")
+							self.set(i, data[i])
+		else:
+			print("Don't have algorithm for save version, done.")
 
 func load_default_settings() -> void:
 	print("Loading default volume levels")
@@ -169,9 +234,16 @@ func set_volume(bus: String, volume: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus), volume)
 
 func save_game() -> void:
+	save_version()
 	if entered_settings:
 		save_settings()
+	save_progress()
+	Dialogic.Save.save("", false, Dialogic.Save.ThumbnailMode.NONE)
 	print("GAME SAVED")
+
+func save_version() -> void:
+	var save_file: FileAccess = FileAccess.open("user://version.save", FileAccess.WRITE)
+	save_file.store_line(version)
 
 func save_settings() -> void:
 	var save_file: FileAccess = FileAccess.open("user://settings.save", FileAccess.WRITE)
@@ -185,6 +257,25 @@ func save_settings_dict() -> Dictionary:
 		volumedict[i] = get_volume(i)
 	var savedict: Dictionary = {}
 	savedict.merge(volumedict)
+	return savedict
+
+func save_progress() -> void:
+	var save_file: FileAccess = FileAccess.open("user://progress.save", FileAccess.WRITE)
+	var save_dict: Dictionary = save_progress_dict()
+	var json_string: String = JSON.stringify(save_dict)
+	save_file.store_line(json_string)
+
+func save_progress_dict() -> Dictionary:
+	var progressdict: Dictionary = default_progress
+	for i in progressdict.keys():
+		if progressdict[i] is float or progressdict[i] is int:
+			if self.get(i) > 0:
+				progressdict[i] = self.get(i)
+		else:
+			if self.get(i) != false:
+				progressdict[i] = self.get(i)
+	var savedict: Dictionary = {}
+	savedict.merge(progressdict)
 	return savedict
 
 func _notification(what: int) -> void:

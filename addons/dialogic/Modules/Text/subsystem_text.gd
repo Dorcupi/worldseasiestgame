@@ -333,8 +333,8 @@ func update_name_label(character:DialogicCharacter, force := false):
 	elif character_id != speaker_identifier:
 		speaker_updated.emit(character)
 		speaker_identifier = character_id
-	else:
-		return
+	#else:
+		#return
 
 	var name_label_text := get_character_name_parsed(character)
 
