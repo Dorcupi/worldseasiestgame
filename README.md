@@ -29,3 +29,17 @@ This game is still in development and story, features, and overall gameplay are 
 - b1.0.0 [October 30th, 2026] [first official release]
 ### Jam Version
 - 0.1.0 [July 26th, 2026]
+
+## Credits
+**Code:** Me 
+**Music:** Me
+​**Dialogue:​** Me
+**Font:** Gorditas Bold
+**Majority of Assets:** Kennedy
+**Assets Not Made By Kennedy:** Me 
+**Godot Splash:** _Also_ Kennedy
+**Generated Sound Effects:** Gdfxr
+**Outsourced Sound Effects:** Various Pixabay Artists
+**Shaders:** Godot Shaders ~~and prayers to God~~
+​**Dialogue System:​** Dialogic 2 
+No code in this game was made with the help of AI
