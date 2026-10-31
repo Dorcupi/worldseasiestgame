@@ -1,6 +1,7 @@
 
 # The World's Easiest Game
 A game where you go against the narrator and do literally everything to not wait thirty seconds.
+
 <img width="800" height="450" alt="ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/9b6583b6-c619-4e42-8181-e364213519f9" />
 
 ## Play
