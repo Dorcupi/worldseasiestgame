@@ -35,8 +35,18 @@ This game is super easy. All you have to do is wait thirty seconds and this ~~_s
 - Full main menu and splash screen.
 - Settings menu to adjust volume that is saved between game sessions.
 
+## Controls
+**W, S, A, D, Arrow Keys, D-Pad, Left Joystick:** Move (Collect the Coins, Kill the Zombies)
+
+**Left Mouse Button, Right Trigger, Playstation X, Xbox & Nintendo A:** Shoot (Kill the Zombies)
+
+**Left Mouse Button, Space, Playstation X, Xbox & Nintendo A:** Jump (Dodge the Pipes)
+
+**You should probably click all buttons you see on screen.**
+
 ## Disclaimer
 This game is still in development and story, features, and overall gameplay are subject to change. Bugs may be found.
+
 ## Version History
 **Descending from newest to oldest.**
 ### Beta
