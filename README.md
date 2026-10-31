@@ -7,7 +7,7 @@ A game where you go against the narrator and do literally everything to not wait
 ## Play
 There are two ways to play The World's Easiest Game.
 1. Play the game today in browser at [itch.io!](https://dorcdev.itch.io/worlds-easiest-game)
-2. Download the game in the Releases tab or at [itch.io!](https://dorcdev.itch.io/worlds-easiest-game/purchase)
+2. Download the game in the Releases tab or at [itch.io!](https://dorcdev.itch.io/worlds-easiest-game/purchase) To run on MacOS, follow [these instructions.](https://docs.godotengine.org/en/stable/tutorials/export/running_on_macos.html#app-is-signed-including-ad-hoc-signatures-but-not-notarized)
 
 ## About
 **You can't lose this!**
